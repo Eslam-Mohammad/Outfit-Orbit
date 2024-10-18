@@ -9,7 +9,7 @@ class SignUpWithEmailAndPassword {
 
   SignUpWithEmailAndPassword(this.repository);
 
-  Future<Either<Failure, AuthEntity>> call(String email ,String password) async {
-    return await repository.signUpWithEmailAndPassword(email:email, password:password);
+  Future<Either<Failure, AuthEntity>> call(String email ,String password,String displayName) async {
+    return await repository.signUpWithEmailAndPassword(email:email, password:password,displayName:displayName);
   }
 }

@@ -47,11 +47,14 @@ class AuthRepositoryImpl extends AuthRepository {
   Future<Either<Failure, AuthEntity>> signInWithGoogle() async{
     if(await networkInfo.isConnected!){
       try{
+        print("*********************************************trying repositoryimpl method in sign in with google");
         final user = await remoteDataSource.signInWithGoogle();
+        print("****************didnot go to cache");
         localDataSource.cacheAuth(user);
         return Right(user);
       }on ServerException catch (e)
       {
+        print("*********************************************exception in sign in with google in repositoryimpl${e.errorModel.errorMessage}");
         return Left(Failure(errMessage: e.errorModel.errorMessage));
       }
     }else{
@@ -68,14 +71,17 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<Either<Failure, AuthEntity>> signUpWithEmailAndPassword({required String email, required String password}) async{
+  Future<Either<Failure, AuthEntity>> signUpWithEmailAndPassword({required String email, required String password,required String displayName}) async{
    if(await networkInfo.isConnected!) {
      try {
+       print("*********************************************trying repositoryimpl method in sign up with email");
        final user =await remoteDataSource.signUpWithEmailAndPassword(
-           email: email, password: password);
+           email: email, password: password, displayName: displayName);
        localDataSource.cacheAuth(user);
        return Right(user);
      } on ServerException catch (e) {
+       print("*********************************************exception in sign up with email in repositoryimpl");
+       print("*********************************************trying ${e.errorModel.errorMessage} ");
        return Left(Failure(errMessage: e.errorModel.errorMessage));
      }
    }

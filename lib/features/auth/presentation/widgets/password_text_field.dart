@@ -18,12 +18,12 @@ class CustomPasswordTextField extends StatelessWidget {
       obscureText: true,
       controller: passwordController,
       decoration: InputDecoration(
-        labelStyle: const TextStyle(color: AppColors.primary),
+        labelStyle:  TextStyle(color: color),
         labelText: 'Password',
         prefixIcon:  Icon(Icons.lock,color: color,),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10),borderSide: const BorderSide(color: AppColors.primary,width: 2.0),),
-        focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10),borderSide: const BorderSide(color: AppColors.primary,width: 2.0),),
-        enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10),borderSide: const BorderSide(color: AppColors.primary,width: 2.0),),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10),borderSide:  BorderSide(color: color,width: 2.0),),
+        focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10),borderSide:  BorderSide(color: color,width: 2.0),),
+        enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10),borderSide:  BorderSide(color: color,width: 2.0),),
 
       ),
     );

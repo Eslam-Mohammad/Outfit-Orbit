@@ -1,5 +1,6 @@
 import 'package:e_commerce_app/core/constants/app_colors.dart';
 import 'package:e_commerce_app/core/constants/app_text_styles.dart';
+import 'package:e_commerce_app/core/routes/app_router.dart';
 
 import 'package:e_commerce_app/core/widgets/custom_elevatedbtn.dart';
 
@@ -7,43 +8,50 @@ import 'package:e_commerce_app/features/auth/presentation/cubit/auth_cubit.dart'
 import 'package:e_commerce_app/features/auth/presentation/cubit/auth_state.dart';
 import 'package:e_commerce_app/features/auth/presentation/widgets/email_text_field.dart';
 import 'package:e_commerce_app/features/auth/presentation/widgets/password_text_field.dart';
+import 'package:e_commerce_app/generated/assets.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 
-class SignUpScreen extends StatelessWidget {
+import '../../../../core/services/service_locator_get_it.dart';
+import '../widgets/custom_name_text_field.dart';
+
+
+
+class SignUpScreen extends StatefulWidget {
    SignUpScreen({super.key});
+
+  @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
  final GlobalKey<FormState> formKey =  GlobalKey<FormState>();
+
  final TextEditingController firstNameController = TextEditingController();
+
   final TextEditingController lastNameController = TextEditingController();
+
   final TextEditingController emailController = TextEditingController();
+
   final TextEditingController passwordController = TextEditingController();
 
-  Future<void> dispose(){
-    firstNameController.dispose();
-    lastNameController.dispose();
-    emailController.dispose();
-    passwordController.dispose();
-    return Future.value(null);
-  }
+ @override
+ void dispose() {
+   firstNameController.dispose();
+   lastNameController.dispose();
+   emailController.dispose();
+   passwordController.dispose();
+   super.dispose();
+ }
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AuthCubit, AuthState>(
-        listener: (context, state) async{
-        if(state is SignUpSuccess){
-
-          GoRouter.of(context).pushReplacement('/signin');
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Verify your account"),backgroundColor: Colors.red,));
-          await FirebaseAuth.instance.signOut();
-        }else if (state is SignUpFailed) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message),backgroundColor: Colors.red,));
-        }
-
-        },
-      builder: (context, state) {
-       return Scaffold(
+    Size size = MediaQuery.of(context).size;
+    return Scaffold(
       body:Form(
         key: formKey,
         child: Padding(
@@ -55,92 +63,114 @@ class SignUpScreen extends StatelessWidget {
                 children: [
                   //Welcome Text
                   Padding(
-                    padding: const EdgeInsets.only(top:120 ),
+                    padding: const EdgeInsets.only(top:100 ),
                     child: Text("Welcome !",
                     style: AppTextStyles.poppins500style24.copyWith(fontWeight: FontWeight.w600,fontSize: 30.0),),
                   ),
                   const SizedBox(height: 40,),
+
                   //First Name Field
-                  TextFormField(
-                    validator: (value){
-                      if(value!.isEmpty){
-                        return 'Please enter your first name';
-                      }
-                      return null;
-                    },
-                    controller: firstNameController,
-                    decoration: InputDecoration(
-                      focusColor: AppColors.primary,
-                      labelStyle: const TextStyle(color: AppColors.primary),
-                      labelText: "First Name",
-
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10),borderSide: const BorderSide(color: AppColors.primary,width: 2.0),),
-                      focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10),borderSide: const BorderSide(color: AppColors.primary,width: 2.0),),
-                      enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10),borderSide: const BorderSide(color: AppColors.primary,width: 2.0),),
-
-                    ),
-                  ),
+                  CustomNameTextField(NameController: firstNameController, color: AppColors.fontGrey, identifyName: "First"),
                   const SizedBox(height: 25,),
+
                   //Last Name Field
-                  TextFormField(
-                    validator: (value){
-                      if(value!.isEmpty){
-                        return 'Please enter your last name';
-                      }
-                      return null;
-                    },
-                    controller: lastNameController,
-                    decoration: InputDecoration(
-                      labelStyle: const TextStyle(color: AppColors.primary),
-                      labelText: "Last Name",
-
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10),borderSide: const BorderSide(color: AppColors.primary,width: 2.0),),
-                      focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10),borderSide: const BorderSide(color: AppColors.primary,width: 2.0),),
-                      enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10),borderSide: const BorderSide(color: AppColors.primary,width: 2.0),),
-
-
-                    ),
-                  ),
+                  CustomNameTextField(NameController: lastNameController, color: AppColors.fontGrey, identifyName: "Last"),
                   const SizedBox(height: 25,),
+
                   //Email Field
-                  CustomEmailTextField(emailController: emailController, color: AppColors.primary),
+                  CustomEmailTextField(emailController: emailController, color: AppColors.fontGrey),
                   const SizedBox(height: 25,),
+
                   //Password Field
-                  CustomPasswordTextField(passwordController: passwordController, color: AppColors.primary),
+                  CustomPasswordTextField(passwordController: passwordController, color: AppColors.fontGrey),
                   const SizedBox(height: 25,),
+
+
                   //Terms and Conditions
-                  Row(
+                  BlocBuilder<AuthCubit, AuthState>(
+                   builder: (context, state) {
+                         return Row(
                     children: [
-                      Checkbox(value:AuthCubit.get(context).isAgreed, onChanged: (value){
-                        AuthCubit.get(context).agreeToTerms(value!);
-
-
+                      Checkbox(value:getIt<AuthCubit>().isAgreed??false, onChanged: (value){
+                        getIt<AuthCubit>().agreeToTerms(value!);
                       }),
                       const SizedBox(width: 10,),
                       const Text("I agree to the terms and conditions",
                       ),
                     ],
-                  ),
+                  );
+  },
+),
                   const SizedBox(height: 60,),
+
+                  BlocConsumer<AuthCubit,AuthState>(
+                      builder: (context, state){
+
+                        return state is SignUpLoading?
+                        const CircularProgressIndicator(color: AppColors.primary,):
+                        CustomElevatedbtn(text: "Sign Up", onPressed: (){
+                          if(formKey.currentState!.validate()&&getIt<AuthCubit>().isAgreed!) {
+
+                            getIt<AuthCubit>().signUpWithEmail(emailController.text, passwordController.text,firstNameController.text+" "+lastNameController.text);
+                            getIt<AuthCubit>().addUserInfo({
+                              "firstName": firstNameController.text,
+                              "lastName": lastNameController.text,
+                              "email": emailController.text,
+                              "verified": false,
+                            });
+
+                          }
+
+                        }) ;
+
+                      },
+                      listener: (context, state)async{
+                        if(state is SignUpSuccess){
+
+                          GoRouter.of(context).pushReplacement(loginPath);
+                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Verify your account"),backgroundColor: Colors.red,));
+                          await FirebaseAuth.instance.signOut();
+                        }else if (state is SignUpFailure) {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message),backgroundColor: Colors.red,));
+                        }
+
+                      },
+                  ),
+
                   //Sign Up Button
-                    state is SignUploading?
-                    const CircularProgressIndicator(color: AppColors.primary,):
-                     CustomElevatedbtn(text: "Sign Up", onPressed: (){
-              if(formKey.currentState!.validate()&&AuthCubit.get(context).isAgreed!){
-
-                 AuthCubit.get(context).addUserInfo({
-                                   "firstName": firstNameController.text,
-                                   "lastName": lastNameController.text,
-                                   "email": emailController.text
-                                  });
-
-              }
-
-            }),
-                  
 
 
-                  const SizedBox(height: 15,),
+
+
+
+
+                  const SizedBox(
+                    height: 8,),
+                  Text("---------------------- or continue with ----------------------"),
+                  const SizedBox(
+                    height: 8,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      IconButton(onPressed: ()async{
+                        getIt<AuthCubit>().signInWithGoogle();
+                      }, icon:Image.asset(Assets.imagesGoogle,width:60,height: 55,) ),
+                      SizedBox(width: size.width*0.1,),
+                      IconButton(onPressed: (){
+                         AwesomeDialog(
+                            context: context,
+                            dialogType: DialogType.info,
+                            animType: AnimType.rightSlide,
+                            title: 'OOPS!',
+                            desc: 'This feature is not available yet',
+                            btnCancelOnPress: () {},
+                        btnOkOnPress: () {},
+                        )..show();
+                      }, icon: SvgPicture.asset(Assets.imagesFacebook)),
+                    ],
+                  ),
+
+
                   //Already have an account
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -148,8 +178,8 @@ class SignUpScreen extends StatelessWidget {
                       const Text("Already have an account?",style: TextStyle(fontSize: 16.0),),
                       const SizedBox(width: 5,),
                        TextButton(onPressed: (){
-                        GoRouter.of(context).pushReplacement("/signin");
-                      }, child: const Text("Sign In",style: TextStyle(color: AppColors.primary,fontSize: 16.0),)),
+                        GoRouter.of(context).pushReplacement(loginPath);
+                      }, child: const Text("Sign In",style: TextStyle(color: AppColors.fontSecondaryColor,fontSize: 16.0),)),
                     ],
                   )
 
@@ -160,7 +190,26 @@ class SignUpScreen extends StatelessWidget {
         ),
       ),
     );
-  },
-);
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

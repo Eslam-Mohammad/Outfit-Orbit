@@ -8,7 +8,7 @@ import 'package:e_commerce_app/features/auth/domain/repositories/auth_repository
 class SignInWithGoogle {
   final AuthRepository repository;
 
-  SignInWithGoogle(this.repository);
+  SignInWithGoogle({required this.repository});
 
   Future<Either<Failure, AuthEntity>> call() async {
     return await repository.signInWithGoogle();
