@@ -2,6 +2,7 @@
 
 import 'package:e_commerce_app/core/routes/app_router.dart';
 import 'package:e_commerce_app/core/theme/app_theme.dart';
+import 'package:e_commerce_app/features/home/presentation/manager/home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,8 +18,10 @@ class OutfitOrbitApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<AuthCubit>(create: (context) => getIt<AuthCubit>()),
+        BlocProvider<HomeCubit>(create: (context) => getIt<HomeCubit>()),
       ],
       child: MaterialApp.router(
+
         debugShowCheckedModeBanner: false,
         theme: themeDataLight,
         routerConfig: router,

@@ -14,6 +14,11 @@ class CacheException implements Exception {
   CacheException({required this.errorMessage});
 }
 
+class RetryException implements Exception {
+  final String errorMessage;
+  RetryException({required this.errorMessage});
+}
+
 class BadCertificateException extends ServerException {
   BadCertificateException(super.errorModel);
 }

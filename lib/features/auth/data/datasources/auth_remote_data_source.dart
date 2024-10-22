@@ -124,6 +124,7 @@ class AuthRemoteDataSource {
           print("******************************** User made *************${userCredential.user!.email}");
          print("******************************** User made *************${userCredential.user!}");
          print("******************************** User made *************${FirebaseAuth.instance.currentUser!}");
+
          return AuthModel.fromFirebaseUser(userCredential.user!);
 
      }on PlatformException catch (e) {
@@ -147,6 +148,7 @@ class AuthRemoteDataSource {
          await googleSignIn.disconnect();
          await googleSignIn.signOut();
        }
+
         return Future.value(unit);
 
      }catch(e){

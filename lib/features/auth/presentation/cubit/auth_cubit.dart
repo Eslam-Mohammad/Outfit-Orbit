@@ -60,6 +60,13 @@ class AuthCubit extends Cubit<AuthState> {
     result.fold(
           (failure) => emit(GoogleFailure(message: failure.errMessage)),
           (authEntity) {
+            addUserInfo({
+              "email":authEntity.email,
+              "displayName":authEntity.displayName,
+              "uid":authEntity.id,
+              "photoURL":authEntity.photoUrl,
+              "phoneNumber":authEntity.phoneNumber,
+            });
             theUserInformation = authEntity;
             emit(GoogleSuccess(authEntity: authEntity));
           },

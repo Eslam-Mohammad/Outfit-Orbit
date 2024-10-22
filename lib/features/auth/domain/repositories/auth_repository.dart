@@ -19,3 +19,4 @@ abstract class AuthRepository {
   Future <Either<Failure,Unit>> resetPassword({required String email});
 
 }
+

@@ -112,12 +112,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           if(formKey.currentState!.validate()&&getIt<AuthCubit>().isAgreed!) {
 
                             getIt<AuthCubit>().signUpWithEmail(emailController.text, passwordController.text,firstNameController.text+" "+lastNameController.text);
-                            getIt<AuthCubit>().addUserInfo({
-                              "firstName": firstNameController.text,
-                              "lastName": lastNameController.text,
-                              "email": emailController.text,
-                              "verified": false,
-                            });
+
 
                           }
 

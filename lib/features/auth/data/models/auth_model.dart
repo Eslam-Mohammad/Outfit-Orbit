@@ -5,12 +5,15 @@ import 'package:e_commerce_app/features/auth/domain/entities/auth_entitiy.dart';
 
 class AuthModel extends AuthEntity {
   AuthModel({
-   required super.id,
+    required super.id,
     required super.email,
     required super.displayName,
     super.photoUrl,
     super.phoneNumber,
-});
+  });
+
+
+
 
   factory AuthModel.fromFirebaseUser(firebaseUser) {
     return AuthModel(

@@ -8,6 +8,7 @@ class Assets {
   static const String fontsPoppinsRegular = 'assets/fonts/Poppins-Regular.ttf';
   static const String imagesAdd = 'assets/images/add.svg';
   static const String imagesApple = 'assets/images/apple.svg';
+  static const String imagesBeauty = 'assets/images/beauty.png';
   static const String imagesBoard1 = 'assets/images/board1.svg';
   static const String imagesBoard2 = 'assets/images/board2.svg';
   static const String imagesBoard3 = 'assets/images/board3.svg';
@@ -19,14 +20,18 @@ class Assets {
   static const String imagesCoupon = 'assets/images/coupon.svg';
   static const String imagesEye = 'assets/images/eye.svg';
   static const String imagesFacebook = 'assets/images/Facebook.svg';
+  static const String imagesFashion = 'assets/images/fashion.png';
   static const String imagesFilter = 'assets/images/filter.svg';
   static const String imagesGoToCart = 'assets/images/goToCart.svg';
   static const String imagesGoogle = 'assets/images/Google.png';
+  static const String imagesKids = 'assets/images/kids.png';
   static const String imagesLock = 'assets/images/lock.svg';
   static const String imagesLogo2 = 'assets/images/logo2.png';
   static const String imagesLogo3 = 'assets/images/logo3.png';
+  static const String imagesLogo5 = 'assets/images/logo5.svg';
   static const String imagesMaestro = 'assets/images/maestro.svg';
   static const String imagesMail = 'assets/images/Mail.svg';
+  static const String imagesMens = 'assets/images/mens.png';
   static const String imagesOutword = 'assets/images/outword.png';
   static const String imagesPadlock = 'assets/images/padlock.png';
   static const String imagesPaypal = 'assets/images/paypal.svg';
@@ -36,5 +41,6 @@ class Assets {
   static const String imagesTrueMark = 'assets/images/trueMark.svg';
   static const String imagesUser = 'assets/images/User.svg';
   static const String imagesVisa = 'assets/images/visa.svg';
+  static const String imagesWomen = 'assets/images/women.png';
 
 }

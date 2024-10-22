@@ -106,6 +106,10 @@ class LoginScreen extends StatelessWidget {
                             if(formKey.currentState!.validate()){
 
                               getIt<AuthCubit>().signInWithEmail(emailController.text, passwordController.text);
+                              getIt<AuthCubit>().addUserInfo({
+                                "email":emailController.text,
+
+                              });
             
                             }
             
