@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../../core/services/service_locator_get_it.dart';
-import '../../../onBoarding/boarding_widgets/smooth_indicator.dart';
+
 import '../manager/home_cubit.dart';
 
 

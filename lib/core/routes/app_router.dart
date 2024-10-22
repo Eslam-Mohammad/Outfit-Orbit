@@ -3,7 +3,9 @@ import 'package:e_commerce_app/features/auth/presentation/cubit/auth_cubit.dart'
 import 'package:e_commerce_app/features/auth/presentation/screens/login_screen.dart';
 import 'package:e_commerce_app/features/auth/presentation/screens/reset_password.dart';
 import 'package:e_commerce_app/features/auth/presentation/screens/signup_screen.dart';
+import 'package:e_commerce_app/features/home/domain/entities/home_entity.dart';
 import 'package:e_commerce_app/features/home/presentation/pages/home.dart';
+import 'package:e_commerce_app/features/home/presentation/pages/item_details_screen.dart';
 import 'package:e_commerce_app/features/onBoarding/onboarding_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -21,6 +23,7 @@ const String firstPage = "/";
 const String loginPath = "/login";
 const String signUpPath = "/signup";
 const String resetPasswordPath = "/resetPassword";
+const String itemDetailsPath = "/itemDetails";
 
 
 final GoRouter router = GoRouter(
@@ -69,6 +72,12 @@ final GoRouter router = GoRouter(
             listener: (context,state){},
             builder: (context,state) => ResetPassword(),
           ),
+    ),
+    GoRoute(path: itemDetailsPath,
+        builder: (context,state) {
+          final product = state.extra as ProductEntity;
+              return     ItemDetailsScreen(product: product);
+        },
     ),
 
   ],);

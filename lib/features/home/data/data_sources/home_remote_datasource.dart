@@ -32,7 +32,7 @@ class HomeRemoteDataSource{
 
 
 
-      Query query = FirebaseFirestore.instance.collection('products').orderBy('name').limit(4);
+      Query query = FirebaseFirestore.instance.collection('products').orderBy('name').limit(6);
 
       if (_lastDocument != null) {
         query = query.startAfterDocument(_lastDocument!);
