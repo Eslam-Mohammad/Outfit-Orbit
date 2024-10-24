@@ -9,7 +9,6 @@ import 'package:e_commerce_app/features/home/presentation/pages/home_screen.dart
 import 'package:e_commerce_app/features/profile/presentation/pages/profile_screen.dart';
 import 'package:e_commerce_app/features/search/presentation/pages/search_screen.dart';
 import 'package:e_commerce_app/features/wishlist/presentation/pages/wishlist_screen.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeCubit extends Cubit<HomeStates> {
@@ -32,10 +31,10 @@ void changeIndex(int index){
 }
 List<dynamic> appScreens=[
   HomeScreen(),
-  WishlistScreen(),
-  CartScreen(),
-  SearchScreen(),
-  ProfileScreen(),
+  const WishlistScreen(),
+  const CartScreen(),
+  const SearchScreen(),
+  const ProfileScreen(),
 
 ];
 

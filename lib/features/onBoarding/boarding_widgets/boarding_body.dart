@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class OnBoardingBody extends StatelessWidget {
-   OnBoardingBody({super.key, required this.pageController});
+   const OnBoardingBody({super.key, required this.pageController});
    final PageController pageController;
   @override
   Widget build(BuildContext context) {

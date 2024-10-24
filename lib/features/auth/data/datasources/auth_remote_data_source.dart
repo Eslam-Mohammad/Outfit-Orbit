@@ -107,7 +107,7 @@ class AuthRemoteDataSource {
 
          // Trigger the authentication flow
          final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-         print("*********************************************${googleUser}");
+         print("*********************************************$googleUser");
          print("*********************************************After first line");
           if(googleUser==null){
             print("*********************************************dialog shown ? and user null");

@@ -12,11 +12,11 @@ import '../widgets/banner_builder.dart';
 
 
 class HomeScreen extends StatelessWidget {
-  HomeScreen({super.key});
+    HomeScreen({super.key});
 
-  TextEditingController searchController = TextEditingController();
+  final TextEditingController searchController = TextEditingController();
   final pageController1 = PageController();
-  ScrollController scrollController = ScrollController();
+  final ScrollController scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -65,12 +65,12 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                 ) :
-                BannerBuilder();
+                const BannerBuilder();
               },
             ),
             const SizedBox(height: 15,),
             // products
-            ProductsGrid(),
+            const ProductsGrid(),
 
 
 

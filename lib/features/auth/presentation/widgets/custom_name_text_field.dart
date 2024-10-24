@@ -4,7 +4,7 @@ class CustomNameTextField extends StatelessWidget {
   final TextEditingController NameController ;
   final Color color;
   final String identifyName;
-   CustomNameTextField({super.key, required this.color, required this.NameController, required this.identifyName});
+   const CustomNameTextField({super.key, required this.color, required this.NameController, required this.identifyName});
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,4 @@
 
-import 'package:e_commerce_app/core/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomEmailTextField extends StatelessWidget {

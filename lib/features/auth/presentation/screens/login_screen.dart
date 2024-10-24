@@ -120,7 +120,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                       const SizedBox(
                         height: 10,),
-                      Text("---------------------- or continue with ----------------------"),
+                      const Text("---------------------- or continue with ----------------------"),
                       const SizedBox(
                         height: 10,),
                       Row(
@@ -139,7 +139,7 @@ class LoginScreen extends StatelessWidget {
                               desc: 'This feature is not available yet',
                               btnCancelOnPress: () {},
                               btnOkOnPress: () {},
-                            )..show();
+                            ).show();
                           }, icon: SvgPicture.asset(Assets.imagesFacebook)),
                         ],
                       ),

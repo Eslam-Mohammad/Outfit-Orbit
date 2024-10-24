@@ -6,6 +6,7 @@ class PriceWidget extends StatelessWidget {
   final num discount;
 
   const PriceWidget({
+    super.key,
     required this.price,
     required this.oldPrice,
     required this.discount,

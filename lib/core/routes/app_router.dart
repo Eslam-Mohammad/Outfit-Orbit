@@ -39,7 +39,7 @@ final GoRouter router = GoRouter(
        return FirebaseAuth.instance.currentUser ==null? OnBoardingScreen() : BlocConsumer<HomeCubit,HomeStates>(
 
           listener: (context,state){},
-          builder: (context,state) => Home(),
+          builder: (context,state) => const Home(),
         );
 
       },
@@ -57,12 +57,12 @@ final GoRouter router = GoRouter(
       builder: (context, state) =>
           BlocConsumer<AuthCubit,AuthState>(
             listener: (context,state){},
-            builder: (context,state) => SignUpScreen(),
+            builder: (context,state) => const SignUpScreen(),
           ),
     ),
     GoRoute(
       path: homePath,
-      builder: (context, state) => Home(),
+      builder: (context, state) => const Home(),
 
     ),
     GoRoute(

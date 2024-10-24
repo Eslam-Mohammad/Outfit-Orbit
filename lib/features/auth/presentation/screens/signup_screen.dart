@@ -22,7 +22,7 @@ import '../widgets/custom_name_text_field.dart';
 
 
 class SignUpScreen extends StatefulWidget {
-   SignUpScreen({super.key});
+   const SignUpScreen({super.key});
 
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
@@ -141,7 +141,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                   const SizedBox(
                     height: 8,),
-                  Text("---------------------- or continue with ----------------------"),
+                  const Text("---------------------- or continue with ----------------------"),
                   const SizedBox(
                     height: 8,),
                   Row(
@@ -160,7 +160,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             desc: 'This feature is not available yet',
                             btnCancelOnPress: () {},
                         btnOkOnPress: () {},
-                        )..show();
+                        ).show();
                       }, icon: SvgPicture.asset(Assets.imagesFacebook)),
                     ],
                   ),

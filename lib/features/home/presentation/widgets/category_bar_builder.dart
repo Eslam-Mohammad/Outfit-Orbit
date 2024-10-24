@@ -18,8 +18,10 @@ class CategoryBarBuilder extends StatelessWidget {
             const Spacer(),
             InkWell(
               onTap: (){},
-              child: SizedBox(child: SvgPicture.asset(Assets.imagesSort),
+              child: SizedBox(
                 height: 50,width: 100,
+                child: SvgPicture.asset(Assets.imagesSort),
+
               ),
             ),
             InkWell(

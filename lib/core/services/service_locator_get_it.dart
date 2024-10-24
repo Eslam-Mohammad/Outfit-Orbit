@@ -19,6 +19,14 @@ import '../../features/auth/domain/usecases/signin_with_email_password.dart';
 import '../../features/auth/domain/usecases/signout.dart';
 import '../../features/auth/domain/usecases/signup_email_password.dart';
 import '../../features/auth/presentation/cubit/auth_cubit.dart';
+import '../../features/cart/data/data_sources/cart_local_datasource.dart';
+import '../../features/cart/data/data_sources/cart_remote_datasource.dart';
+import '../../features/cart/data/repositories/cart_repository_impl.dart';
+import '../../features/cart/domain/repositories/cart_repository.dart';
+import '../../features/cart/domain/use_cases/add_productid_to_cart.dart';
+import '../../features/cart/domain/use_cases/get_cartlist.dart';
+import '../../features/cart/domain/use_cases/remove_productid_fromcart.dart';
+import '../../features/cart/presentation/manager/cart_cubit.dart';
 import '../../features/wishlist/data/data_sources/wishlist_local_datasource.dart';
 import '../../features/wishlist/data/data_sources/wishlist_remote_datasource.dart';
 import '../../features/wishlist/data/repositories/wishlist_repository_impl.dart';
@@ -102,6 +110,27 @@ void setup() {
     getHomeProducts: getIt(),
 
   ));
+////////////////////////////////////////////////////////////////////////////////////////
+ // cart data sources
+  getIt.registerLazySingleton<CartRemoteDataSource>(()=> CartRemoteDataSource());
+  getIt.registerLazySingleton<CartLocalDataSource>(()=> CartLocalDataSource());
+  // cart repository
+  getIt.registerLazySingleton<CartRepository>(()=> CartRepositoryImpl(
+    networkInfo: getIt(),
+    cartListRemoteDataSource: getIt(),
+    cartListLocalDataSource: getIt(),
+  ));
+  // cart usecases
+  getIt.registerLazySingleton<AddProductIdToCartList>(() => AddProductIdToCartList(getIt()));
+  getIt.registerLazySingleton<GetCartList>(() => GetCartList(getIt()));
+  getIt.registerLazySingleton<RemoveProductIdFromCartList>(() => RemoveProductIdFromCartList(getIt()));
+  // cart cubit
+  getIt.registerSingleton<CartCubit>(CartCubit(
+    getCartList: getIt(),
+    addProductIdToCartList: getIt(),
+    removeProductIdFromCartList: getIt(),
+  ));
+  ////////////////////////////////////////////////////////////////////////////////////////
 
 
 

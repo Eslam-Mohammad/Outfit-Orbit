@@ -6,7 +6,7 @@ import 'package:e_commerce_app/features/home/presentation/manager/home_cubit.dar
 import 'package:e_commerce_app/features/home/presentation/manager/home_state.dart';
 import 'package:e_commerce_app/features/home/presentation/widgets/price_widget.dart';
 import 'package:e_commerce_app/features/wishlist/presentation/manager/wishlist_cubit.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -16,6 +16,7 @@ import 'package:shimmer/shimmer.dart';
 import '../../../wishlist/presentation/manager/wishlist_state.dart';
 
 class ProductsGrid extends StatelessWidget {
+  const ProductsGrid({super. key}) ;
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -29,7 +30,7 @@ class ProductsGrid extends StatelessWidget {
       builder: (context, state) {
         if (state is HomeProductsLoading &&
             getIt<HomeCubit>().products.isEmpty) {
-          return LoadingList();
+          return const LoadingList();
         }
         return GridView.count(
           childAspectRatio: 0.6,
@@ -106,7 +107,7 @@ class ProductsGrid extends StatelessWidget {
                               width: 5,
                             ),
                             Text(
-                              "${product.votingNumber.toStringAsFixed(0)}",
+                              product.votingNumber.toStringAsFixed(0),
                               style: const TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.bold,

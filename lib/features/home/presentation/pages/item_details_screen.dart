@@ -1,10 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_commerce_app/core/constants/app_colors.dart';
 import 'package:e_commerce_app/features/home/domain/entities/home_entity.dart';
-import 'package:e_commerce_app/features/home/presentation/widgets/price_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:shimmer/shimmer.dart';
+
+import '../../../../core/services/service_locator_get_it.dart';
+import '../../../cart/presentation/manager/cart_cubit.dart';
 
 class ItemDetailsScreen extends StatelessWidget {
   const ItemDetailsScreen({super.key , required this.product});
@@ -23,7 +25,17 @@ class ItemDetailsScreen extends StatelessWidget {
             borderRadius: BorderRadius.circular(30),
           ),
           backgroundColor: AppColors.fontSecondaryColor,
-          onPressed: (){},
+          onPressed: (){
+            if(getIt<CartCubit>().cartList.contains(product)){
+              getIt<CartCubit>().removeProductFromCart(product);
+              ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text("Removed from Cart")));
+            }else{
+              getIt<CartCubit>().addProductToCart(product);
+              ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text("Added to Cart")));
+            }
+          },
           child: const Icon(
             color: Colors.white,
             size: 40,
@@ -72,7 +84,7 @@ class ItemDetailsScreen extends StatelessWidget {
                   ),
                   const SizedBox(width: 5,),
                   Text(
-                    "${product.votingNumber.toStringAsFixed(0)}",style: const TextStyle(fontSize: 14,fontWeight: FontWeight.bold,color:Colors.grey),),
+                    product.votingNumber.toStringAsFixed(0),style: const TextStyle(fontSize: 14,fontWeight: FontWeight.bold,color:Colors.grey),),
                 ],
               ),
               const SizedBox(height: 15,),

@@ -12,7 +12,7 @@ import '../../../../core/services/service_locator_get_it.dart';
 
 
 class WishlistScreen extends StatelessWidget {
-  WishlistScreen({super.key});
+  const WishlistScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class WishlistScreen extends StatelessWidget {
                   }
 
                   if(getIt<WishlistCubit>().wishlist.isEmpty){
-                    return Center(child: Text("No items in wishlist",
+                    return const Center(child: Text("No items in wishlist",
                       style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
                     ));
                   }
@@ -74,9 +74,9 @@ class WishlistScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                SizedBox(height: 5,),
+                                const SizedBox(height: 5,),
                                 Text(product.name,
-                                  style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
+                                  style: const TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                 ),
@@ -96,7 +96,7 @@ class WishlistScreen extends StatelessWidget {
                                       itemSize: 20.0,
                                       direction: Axis.horizontal,
                                     ),
-                                    Spacer(),
+                                    const Spacer(),
                                     IconButton(
                                       iconSize: 35,
                                       onPressed: () {
@@ -110,7 +110,7 @@ class WishlistScreen extends StatelessWidget {
 
 
                                       },
-                                      icon:getIt<WishlistCubit>().wishlist.contains(product)?Icon(Icons.favorite,color: Colors.red,):Icon(Icons.favorite),
+                                      icon:getIt<WishlistCubit>().wishlist.contains(product)?const Icon(Icons.favorite,color: Colors.red,):const Icon(Icons.favorite),
                                     )
                                   ],
                                 ),
@@ -124,14 +124,14 @@ class WishlistScreen extends StatelessWidget {
                     );
 
                   }, separatorBuilder:(context,i){
-                    return Divider(thickness: 1,);
+                    return const Divider(thickness: 1,);
                   } ,
                       itemCount: getIt<WishlistCubit>().wishlist.length,
                   );
                 },
                 listener: (context, state) {
                   if(state is WishlistFailure){
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("            Error has happened")));
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("            Error has happened")));
                   }
 
                 }
