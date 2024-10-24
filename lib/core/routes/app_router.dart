@@ -13,6 +13,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/auth/presentation/cubit/auth_state.dart';
+import '../../features/home/presentation/manager/home_cubit.dart';
+import '../../features/home/presentation/manager/home_state.dart';
 
 
 
@@ -32,12 +34,13 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: firstPage,
       builder: (context, state) {
-        return Home();
 
-       // return FirebaseAuth.instance.currentUser ==null? OnBoardingScreen() : BlocConsumer<HomeCubit,HomeState>(
-       //    listener: (context,state){},
-       //    builder: (context,state) => Home(),
-       //  );
+
+       return FirebaseAuth.instance.currentUser ==null? OnBoardingScreen() : BlocConsumer<HomeCubit,HomeStates>(
+
+          listener: (context,state){},
+          builder: (context,state) => Home(),
+        );
 
       },
     ),
@@ -57,14 +60,11 @@ final GoRouter router = GoRouter(
             builder: (context,state) => SignUpScreen(),
           ),
     ),
-    // GoRoute(
-    //   path: homePath,
-    //   builder: (context, state) =>
-    //       BlocProvider(
-    //         create: (context) => HomeCubit(),
-    //         child: HomeScreen(),
-    //       ),
-    // ),
+    GoRoute(
+      path: homePath,
+      builder: (context, state) => Home(),
+
+    ),
     GoRoute(
       path: resetPasswordPath,
       builder: (context, state) =>

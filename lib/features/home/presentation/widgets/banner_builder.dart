@@ -10,7 +10,7 @@ import '../manager/home_cubit.dart';
 
 
 class BannerBuilder extends StatefulWidget {
-   BannerBuilder({super.key });
+   const BannerBuilder({super.key });
 
 
   @override
@@ -41,7 +41,7 @@ class _BannerBuilderState extends State<BannerBuilder> {
                   ),
                 ),
               ),
-              errorWidget: (context, url, error) => Icon(Icons.error),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
             );
           }).toList(),
           options: CarouselOptions(
@@ -67,7 +67,7 @@ class _BannerBuilderState extends State<BannerBuilder> {
           height: size.height*0.02,
         ),
 
-        AnimatedSmoothIndicator(activeIndex: currentIndex, count: 5, effect: WormEffect(
+        AnimatedSmoothIndicator(activeIndex: currentIndex, count: 5, effect: const WormEffect(
           dotWidth: 10,
           spacing: 15,
           dotHeight: 10,

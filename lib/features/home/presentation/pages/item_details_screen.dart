@@ -1,8 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_commerce_app/core/constants/app_colors.dart';
 import 'package:e_commerce_app/features/home/domain/entities/home_entity.dart';
 import 'package:e_commerce_app/features/home/presentation/widgets/price_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:shimmer/shimmer.dart';
 
 class ItemDetailsScreen extends StatelessWidget {
   const ItemDetailsScreen({super.key , required this.product});
@@ -22,7 +24,7 @@ class ItemDetailsScreen extends StatelessWidget {
           ),
           backgroundColor: AppColors.fontSecondaryColor,
           onPressed: (){},
-          child: Icon(
+          child: const Icon(
             color: Colors.white,
             size: 40,
               Icons.shopping_cart
@@ -36,18 +38,31 @@ class ItemDetailsScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 20,),
-              Image.network(product.imageUrl,fit: BoxFit.contain,),
-              SizedBox(height: 20,),
-              Text(product.name,style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
-              SizedBox(height: 10,),
-              Text(product.description,style: TextStyle(fontSize: 20),),
-              SizedBox(height: 15,),
+              const SizedBox(height: 20,),
+            CachedNetworkImage(
+              imageUrl:  product.imageUrl,
+              fit: BoxFit.contain,
+              placeholder: (context,url){
+                return Shimmer.fromColors(
+                  baseColor: Colors.grey,
+                  highlightColor: Colors.white,
+                  child: Container(
+                    color: Colors.grey,
+                  ),
+                );
+              },
+            ),
+
+              const SizedBox(height: 20,),
+              Text(product.name,style: const TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
+              const SizedBox(height: 10,),
+              Text(product.description,style: const TextStyle(fontSize: 20),),
+              const SizedBox(height: 15,),
               Row(
                 children: [
                   RatingBarIndicator(
                     rating: product.rating.toDouble(),
-                    itemBuilder: (context, index) => Icon(
+                    itemBuilder: (context, index) => const Icon(
                       Icons.star,
                       color: Colors.amber,
                     ),
@@ -55,38 +70,38 @@ class ItemDetailsScreen extends StatelessWidget {
                     itemSize: 20.0,
                     direction: Axis.horizontal,
                   ),
-                  SizedBox(width: 5,),
+                  const SizedBox(width: 5,),
                   Text(
-                    "${product.votingNumber.toStringAsFixed(0)}",style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold,color:Colors.grey),),
+                    "${product.votingNumber.toStringAsFixed(0)}",style: const TextStyle(fontSize: 14,fontWeight: FontWeight.bold,color:Colors.grey),),
                 ],
               ),
-              SizedBox(height: 15,),
+              const SizedBox(height: 15,),
               Row(
                children: [
                  Text(
                    '\$${product.price.toStringAsFixed(2)}',
-                   style: TextStyle(
+                   style: const TextStyle(
                      color: Colors.black,
                      fontSize: 20,
                      fontWeight: FontWeight.bold,
                    ),
                  ),
-                 SizedBox(width: 15,),
+                 const SizedBox(width: 15,),
                  if(product.discount>0)
                  Text(
                    '\$${product.oldPrice.toStringAsFixed(2)}',
-                   style: TextStyle(
+                   style: const TextStyle(
                      color: Colors.grey,
                      fontSize: 20,
                      decoration: TextDecoration.lineThrough,
                    ),
                  ),
 
-                  SizedBox(width: 20,),
+                  const SizedBox(width: 20,),
                   if(product.discount>0)
                     Text(
                       '-${product.discount.toStringAsFixed(0)}%OFF',
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.red,
                         fontSize: 25,
                         fontWeight: FontWeight.bold,
@@ -94,11 +109,11 @@ class ItemDetailsScreen extends StatelessWidget {
                     ),
                ],
              ),
-              SizedBox(height: 10,),
+              const SizedBox(height: 10,),
              if (product.sizeAvailable != null)
                   ...[
-                 Text('Sizes', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                 SizedBox(height: 10),
+                 const Text('Sizes', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                 const SizedBox(height: 10),
                   Wrap(
                     spacing: 10,
                     children: List.generate(product.sizeAvailable!.length, (index) {
@@ -107,12 +122,12 @@ class ItemDetailsScreen extends StatelessWidget {
                       );
                     }),
                   ),
-                 SizedBox(height: 10),
+                 const SizedBox(height: 10),
                  ],
               if (product.colorsAvailable != null)
                 ...[
-                  Text('Colors', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                  SizedBox(height: 10),
+                  const Text('Colors', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 10),
                   Wrap(
                     spacing: 10,
                     children: List.generate(product.colorsAvailable!.length, (index) {
@@ -122,7 +137,7 @@ class ItemDetailsScreen extends StatelessWidget {
                          );
                     }),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                 ],
 
 

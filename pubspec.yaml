@@ -69,6 +69,8 @@ dependencies:
   convex_bottom_bar: ^3.2.0
   cached_network_image: ^3.4.1
   flutter_rating_bar: ^4.0.1
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
 
 
 

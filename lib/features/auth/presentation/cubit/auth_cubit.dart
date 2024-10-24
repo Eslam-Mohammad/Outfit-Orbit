@@ -56,7 +56,7 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> signWithGoogle() async {
     emit(GoogleLoading());
     final result = await signInWithGoogle();
-    print(" ********************from cubit **************** ${result.toString()}");
+
     result.fold(
           (failure) => emit(GoogleFailure(message: failure.errMessage)),
           (authEntity) {
@@ -76,14 +76,11 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> signUpWithEmail(String email, String password,String displayName) async {
     emit(SignUpLoading());
     final result = await signUpWithEmailAndPassword(email, password,displayName);
-    print(" ************************************ ${result.toString()}");
-    print(" ************************************ ${result.isRight()}");
-    print(" ************************************ ${result}");
+
     result.fold(
           (failure) => emit(SignUpFailure(message: failure.errMessage)),
           (authEntity){
-            print(" ************************************ ${authEntity}");
-            print(" ************************************ reach before");
+
         theUserInformation = authEntity;
         emit(SignUpSuccess(authEntity: authEntity));
       },
@@ -121,11 +118,17 @@ class AuthCubit extends Cubit<AuthState> {
 
 
 
-Future<void> addUserInfo(Map<String,dynamic>userInfo) async {
+Future<void> addUserInfo(Map<String, dynamic> userInfo) async {
   CollectionReference users = FirebaseFirestore.instance.collection('users');
-  await users.add(userInfo)
-      .then((value) => print("User Added"))
-      .catchError((error) => print("Failed to add user: $error"));
+  QuerySnapshot querySnapshot = await users.where('email', isEqualTo: userInfo['email']).get();
+
+  if (querySnapshot.docs.isEmpty) {
+    await users.add(userInfo)
+        .then((value) => print("User Added"))
+        .catchError((error) => print("Failed to add user: $error"));
+  } else {
+    print("User already exists");
+  }
 }
 
 

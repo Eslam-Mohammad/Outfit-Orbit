@@ -22,7 +22,7 @@ class LoadingList extends StatelessWidget {
 
           ),
         ),
-      ), separatorBuilder:(context,index)=> const SizedBox(width: 12.0,), itemCount: 5),
+      ), separatorBuilder:(context,index)=> const SizedBox(width: 12.0,), itemCount: 4),
     );
   }
 }

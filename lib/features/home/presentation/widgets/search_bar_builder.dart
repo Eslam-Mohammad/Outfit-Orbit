@@ -13,11 +13,11 @@ class SearchBarBuilder extends StatelessWidget {
         print(value);
       },
 
-      hintStyle: WidgetStatePropertyAll(TextStyle(color: Colors.grey)),
+      hintStyle: const WidgetStatePropertyAll(TextStyle(color: Colors.grey)),
       controller: searchController,
       hintText: "Search Any Product...",
       backgroundColor: WidgetStatePropertyAll(Colors.grey[300]),
-      leading: Icon(Icons.search,color: Colors.grey,),
+      leading: const Icon(Icons.search,color: Colors.grey,),
 
     );
   }

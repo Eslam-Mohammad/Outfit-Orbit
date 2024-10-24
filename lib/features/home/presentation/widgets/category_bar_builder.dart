@@ -7,14 +7,15 @@ import 'package:flutter_svg/flutter_svg.dart';
 class CategoryBarBuilder extends StatelessWidget {
    CategoryBarBuilder({super.key});
  final List<String  > categories =[Assets.imagesFashion,Assets.imagesBeauty,Assets.imagesMens,Assets.imagesWomen,Assets.imagesKids];
+  @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     return Column(
       children: [
         Row(
           children: [
-            Text("Categories",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
-            Spacer(),
+            const Text("Categories",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
+            const Spacer(),
             InkWell(
               onTap: (){},
               child: SizedBox(child: SvgPicture.asset(Assets.imagesSort),
@@ -24,14 +25,15 @@ class CategoryBarBuilder extends StatelessWidget {
             InkWell(
               onTap: (){},
               child: SizedBox(
-                child: SvgPicture.asset(Assets.imagesFilter),
                 width: 100,height: 50,
+                child: SvgPicture.asset(Assets.imagesFilter),
+
               ),
             ),
 
           ],
         ),
-        Container(
+        SizedBox(
           height: size.height*0.2,
           child: ListView.separated(
               shrinkWrap: true,
@@ -43,7 +45,7 @@ class CategoryBarBuilder extends StatelessWidget {
 
                       height: size.height*0.2,
                       width: size.width*0.2,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         shape: BoxShape.circle,
 
 
@@ -51,7 +53,7 @@ class CategoryBarBuilder extends StatelessWidget {
                       child:Image.asset(categories[index],fit: BoxFit.contain,) ,
                     ),
                   ),
-              separatorBuilder: (context,index) => SizedBox(width: 15,),
+              separatorBuilder: (context,index) => const SizedBox(width: 15,),
               itemCount:categories.length ),
         ),
       ],

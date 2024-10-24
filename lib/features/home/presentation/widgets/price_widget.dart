@@ -5,7 +5,7 @@ class PriceWidget extends StatelessWidget {
   final num oldPrice;
   final num discount;
 
-  PriceWidget({
+  const PriceWidget({
     required this.price,
     required this.oldPrice,
     required this.discount,
@@ -18,7 +18,7 @@ class PriceWidget extends StatelessWidget {
       children: [
         Text(
           '\$${price.toStringAsFixed(2)}',
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.black,
             fontSize: 16,
             fontWeight: FontWeight.bold,
@@ -29,7 +29,7 @@ class PriceWidget extends StatelessWidget {
             children: [
               Text(
                 '\$${oldPrice.toStringAsFixed(2)}',
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.grey,
                   fontSize: 14,
                   decoration: TextDecoration.lineThrough,
@@ -40,7 +40,7 @@ class PriceWidget extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 8.0),
                   child: Text(
                     '-${discount.toStringAsFixed(0)}%',
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.red,
                       fontSize: 14,
                       fontWeight: FontWeight.bold,

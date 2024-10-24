@@ -13,7 +13,7 @@ class HomeRemoteDataSource{
 
     try{
       final result= await FirebaseFirestore.instance.collection("banners").get()
-          .then((value) => value.docs.map((e) => BannerModel.fromJson(e.data()as Map<String,dynamic>)).toList());
+          .then((value) => value.docs.map((e) => BannerModel.fromJson(e.data() as Map<String,dynamic>)).toList());
       return result;
     }catch(e){
       throw ServerException(ErrorModel(

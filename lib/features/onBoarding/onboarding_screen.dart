@@ -38,7 +38,7 @@ class OnBoardingScreen extends StatelessWidget {
                       );
                     }
                   },
-                  child: Text("Next", style: TextStyle(color: AppColors.fontSecondaryColor, fontSize: 20),)
+                  child: const Text("Next", style: TextStyle(color: AppColors.fontSecondaryColor, fontSize: 20),)
               )
 
             ],),

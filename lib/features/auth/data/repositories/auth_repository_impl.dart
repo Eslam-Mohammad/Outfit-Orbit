@@ -102,7 +102,7 @@ class AuthRepositoryImpl extends AuthRepository {
       try {
         await remoteDataSource.signOut();
         localDataSource.clearCache();
-        return Right(unit);
+        return const Right(unit);
       } on ServerException catch (e) {
         return Left(Failure(errMessage: e.errorModel.errorMessage));
       }
@@ -119,7 +119,7 @@ class AuthRepositoryImpl extends AuthRepository {
     if(await networkInfo.isConnected!) {
       try {
         remoteDataSource.resetPassword(email: email);
-        return Right(unit);
+        return const Right(unit);
       } on ServerException catch (e) {
         return Left(Failure(errMessage: e.errorModel.errorMessage));
       }

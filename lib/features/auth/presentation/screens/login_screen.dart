@@ -87,6 +87,10 @@ class LoginScreen extends StatelessWidget {
                           if(state is SignSuccess)
                           {
                             if(FirebaseAuth.instance.currentUser!.emailVerified) {
+                              getIt<AuthCubit>().addUserInfo({
+                                "email": FirebaseAuth.instance.currentUser!.email,
+
+                              });
                               GoRouter.of(context).pushReplacement(homePath);
                               ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(content: Text("Sign In Success"),backgroundColor: Colors.green,));
@@ -106,10 +110,7 @@ class LoginScreen extends StatelessWidget {
                             if(formKey.currentState!.validate()){
 
                               getIt<AuthCubit>().signInWithEmail(emailController.text, passwordController.text);
-                              getIt<AuthCubit>().addUserInfo({
-                                "email":emailController.text,
 
-                              });
             
                             }
             

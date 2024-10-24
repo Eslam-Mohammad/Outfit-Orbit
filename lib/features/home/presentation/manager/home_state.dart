@@ -3,6 +3,7 @@ import 'package:e_commerce_app/features/home/domain/entities/home_entity.dart';
 
 class HomeStates{}
 class HomeInitial extends HomeStates{}
+class HomeChangeIndex extends HomeStates{}
 class HomeProductsLoading extends HomeStates{}
 class HomeProductsSuccess extends HomeStates {}
 class HomeProductsFailure extends HomeStates{

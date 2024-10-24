@@ -79,6 +79,11 @@ class AuthRemoteDataSource {
         print("*********************************************${e.code}");
         throw ServerException( ErrorModel(status:0 ,errorMessage: 'Wrong Password'));
 
+      } else if (e.code == 'email-already-in-use')
+      {
+        print("*********************************************${e.code}");
+        throw ServerException( ErrorModel(status:0 ,errorMessage: 'email already in use'));
+
       }
       else{
         print("*********************************************problem happen in converting in remotedata");
@@ -98,7 +103,7 @@ class AuthRemoteDataSource {
   Future <AuthModel> signInWithGoogle()async{
 
      try{
-          print("*********************************************trying remote method in sign in with google");
+
 
          // Trigger the authentication flow
          final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();

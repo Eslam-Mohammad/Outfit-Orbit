@@ -17,9 +17,9 @@ class OnBoardingBody extends StatelessWidget {
           Column(
             children: [
               SvgPicture.asset(Assets.imagesBoard1),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Text("Choose Products", style: AppTextStyles.poppins500style24.copyWith(fontSize: 30,fontWeight: FontWeight.w700)),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Text("\t\tFashion & Clothes & All u need", style: AppTextStyles.poppins500style24.copyWith(fontSize: 16,fontWeight: FontWeight.w400,color: AppColors.fontGrey)),
               Text("\t\tIn one place", style: AppTextStyles.poppins500style24.copyWith(fontSize: 16,fontWeight: FontWeight.w400,color: AppColors.fontGrey)),
             ],
@@ -27,11 +27,11 @@ class OnBoardingBody extends StatelessWidget {
 
           Column(
             children: [
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               SvgPicture.asset(Assets.imagesBoard2),
-              SizedBox(height: 55),
+              const SizedBox(height: 55),
               Text("Make Payment", style: AppTextStyles.poppins500style24.copyWith(fontSize: 30,fontWeight: FontWeight.w700)),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Text("\t\tAll methods of payment available", style: AppTextStyles.poppins500style24.copyWith(fontSize: 16,fontWeight: FontWeight.w400,color: AppColors.fontGrey)),
               Text("\t\tcash ,vodafone cash ,credit cards", style: AppTextStyles.poppins500style24.copyWith(fontSize: 16,fontWeight: FontWeight.w400,color: AppColors.fontGrey)),
             ],
@@ -41,7 +41,7 @@ class OnBoardingBody extends StatelessWidget {
               SvgPicture.asset(Assets.imagesBoard3),
 
               Text("Get Your Order", style: AppTextStyles.poppins500style24.copyWith(fontSize: 30,fontWeight: FontWeight.w700)),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Text("\t\tYour order is ready for pickup", style: AppTextStyles.poppins500style24.copyWith(fontSize: 16,fontWeight: FontWeight.w400,color: AppColors.fontGrey)),
               Text("\t\tDon't miss the opportunity", style: AppTextStyles.poppins500style24.copyWith(fontSize: 16,fontWeight: FontWeight.w400,color: AppColors.fontGrey)),
             ],

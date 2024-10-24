@@ -19,6 +19,14 @@ import '../../features/auth/domain/usecases/signin_with_email_password.dart';
 import '../../features/auth/domain/usecases/signout.dart';
 import '../../features/auth/domain/usecases/signup_email_password.dart';
 import '../../features/auth/presentation/cubit/auth_cubit.dart';
+import '../../features/wishlist/data/data_sources/wishlist_local_datasource.dart';
+import '../../features/wishlist/data/data_sources/wishlist_remote_datasource.dart';
+import '../../features/wishlist/data/repositories/wishlist_repository_impl.dart';
+import '../../features/wishlist/domain/repositories/wishlist_repository.dart';
+import '../../features/wishlist/domain/use_cases/add_productid_towishlist.dart';
+import '../../features/wishlist/domain/use_cases/get_wishlist.dart';
+import '../../features/wishlist/domain/use_cases/remove_productid_fromwishlist.dart';
+import '../../features/wishlist/presentation/manager/wishlist_cubit.dart';
 
 final GetIt getIt = GetIt.instance;
 
@@ -51,6 +59,29 @@ void setup() {
     resetPassword: getIt(),
     signUpWithEmailAndPassword: getIt(),
   ));
+  ///////////////////////////////////////////////////////////////////////////////////////
+  // wishlist data sources
+  getIt.registerLazySingleton<WishlistRemoteDataSource>(()=> WishlistRemoteDataSource());
+  getIt.registerLazySingleton<WishlistLocalDataSource>(()=> WishlistLocalDataSource());
+
+  // wishlist repository
+  getIt.registerLazySingleton<WishlistRepository>(()=> WishlistRepositoryImpl(
+    networkInfo: getIt(),
+    wishlistRemoteDataSource: getIt(),
+    wishlistLocalDataSource: getIt(),
+  ));
+  // wishlist usecases
+  getIt.registerLazySingleton<AddProductIdToWishlist>(() => AddProductIdToWishlist(getIt()));
+  getIt.registerLazySingleton<GetWhishlist>(() => GetWhishlist(getIt()));
+  getIt.registerLazySingleton<RemoveProductIdFromWishlist>(() => RemoveProductIdFromWishlist(getIt()));
+
+  // wishlist cubit
+  getIt.registerSingleton<WishlistCubit>(WishlistCubit(
+    getWhishlist: getIt(),
+    addProductIdToWishlist: getIt(),
+    removeProductIdFromWishlist: getIt(),
+  ));
+  ////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // home data sources
@@ -71,5 +102,7 @@ void setup() {
     getHomeProducts: getIt(),
 
   ));
+
+
 
 }

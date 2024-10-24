@@ -68,7 +68,7 @@ class HomeScreen extends StatelessWidget {
                 BannerBuilder();
               },
             ),
-            SizedBox(height: 15,),
+            const SizedBox(height: 15,),
             // products
             ProductsGrid(),
 
