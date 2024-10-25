@@ -33,7 +33,7 @@ List<dynamic> appScreens=[
   HomeScreen(),
   const WishlistScreen(),
   const CartScreen(),
-  const SearchScreen(),
+   SearchScreen(),
   const ProfileScreen(),
 
 ];

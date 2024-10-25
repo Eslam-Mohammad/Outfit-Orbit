@@ -9,3 +9,5 @@ class CartFailure extends CartState{
   final String message;
   CartFailure({required this.message});
 }
+
+class PriceUpdated extends CartState{}

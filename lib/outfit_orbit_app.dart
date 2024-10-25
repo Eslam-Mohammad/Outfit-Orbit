@@ -10,6 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'core/services/service_locator_get_it.dart';
 import 'features/auth/presentation/cubit/auth_cubit.dart';
 import 'features/cart/presentation/manager/cart_cubit.dart';
+import 'features/search/presentation/manager/search_cubit.dart';
 
 class OutfitOrbitApp extends StatelessWidget {
  const OutfitOrbitApp({super.key});
@@ -23,6 +24,7 @@ class OutfitOrbitApp extends StatelessWidget {
         BlocProvider<HomeCubit>(create: (context) => getIt<HomeCubit>()),
         BlocProvider<CartCubit>(create: (context) => getIt<CartCubit>()),
         BlocProvider<AuthCubit>(create: (context) => getIt<AuthCubit>()),
+        BlocProvider<SearchCubit>(create: (context) => getIt<SearchCubit>()),
 
 
       ],

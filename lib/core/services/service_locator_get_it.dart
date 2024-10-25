@@ -7,6 +7,7 @@ import 'package:e_commerce_app/features/home/domain/repositories/home_repository
 import 'package:e_commerce_app/features/home/domain/use_cases/get_banners.dart';
 import 'package:e_commerce_app/features/home/domain/use_cases/get_products.dart';
 import 'package:e_commerce_app/features/home/presentation/manager/home_cubit.dart';
+
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
@@ -27,6 +28,10 @@ import '../../features/cart/domain/use_cases/add_productid_to_cart.dart';
 import '../../features/cart/domain/use_cases/get_cartlist.dart';
 import '../../features/cart/domain/use_cases/remove_productid_fromcart.dart';
 import '../../features/cart/presentation/manager/cart_cubit.dart';
+
+
+
+import '../../features/search/presentation/manager/search_cubit.dart';
 import '../../features/wishlist/data/data_sources/wishlist_local_datasource.dart';
 import '../../features/wishlist/data/data_sources/wishlist_remote_datasource.dart';
 import '../../features/wishlist/data/repositories/wishlist_repository_impl.dart';
@@ -131,7 +136,8 @@ void setup() {
     removeProductIdFromCartList: getIt(),
   ));
   ////////////////////////////////////////////////////////////////////////////////////////
-
+  // search cubit
+   getIt.registerSingleton<SearchCubit>(SearchCubit());
 
 
 }

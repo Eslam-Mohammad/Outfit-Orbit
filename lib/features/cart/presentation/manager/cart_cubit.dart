@@ -32,8 +32,15 @@ class CartCubit extends Cubit<CartState>{
         }
     );
   }
-
-
+int totalPrice=0 ;
+  int calculateTotalPrice() {
+     totalPrice = 0;
+    for (var element in cartList) {
+      totalPrice += element.price.toInt();
+    }
+    emit(PriceUpdated());
+    return totalPrice;
+  }
   void addProductToCart(ProductEntity product) async {
     cartList.add(product);
     emit(CartSuccess());

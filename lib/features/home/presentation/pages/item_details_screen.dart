@@ -1,12 +1,17 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_commerce_app/core/constants/app_colors.dart';
+import 'package:e_commerce_app/features/cart/presentation/manager/cart_state.dart';
 import 'package:e_commerce_app/features/home/domain/entities/home_entity.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../../core/services/service_locator_get_it.dart';
 import '../../../cart/presentation/manager/cart_cubit.dart';
+import '../../../wishlist/presentation/manager/wishlist_cubit.dart';
+import '../../../wishlist/presentation/manager/wishlist_state.dart';
+import '../manager/home_cubit.dart';
 
 class ItemDetailsScreen extends StatelessWidget {
   const ItemDetailsScreen({super.key , required this.product});
@@ -43,7 +48,59 @@ class ItemDetailsScreen extends StatelessWidget {
           ),
         ),
       ),
-      appBar: AppBar(),
+      appBar: AppBar(
+        actions: [
+          BlocBuilder<WishlistCubit, WishlistState>(
+                builder: (context, state) {
+              return IconButton(
+                iconSize: 30,
+               onPressed: (){
+              if(getIt<WishlistCubit>().wishlist.contains(product)){
+                getIt<WishlistCubit>().removeProductFromWishlist(product);
+                ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text("Removed from Wishlist")));
+              }else{
+                getIt<WishlistCubit>().addProductToWishlist(product);
+                ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text("Added to Wishlist")));
+              }
+            },
+            icon: Icon(
+              getIt<WishlistCubit>().wishlist.contains(product) ? Icons.favorite : Icons.favorite_border,
+              color: AppColors.fontSecondaryColor,
+            ),
+          );
+  },
+),
+          BlocBuilder<CartCubit,CartState>(
+            builder: (context,state){
+              return IconButton(
+                iconSize: 35,
+                onPressed: (){
+                  getIt<HomeCubit>().changeIndex(2);
+                  Navigator.pop(context);
+
+                },
+                icon:  Stack(
+                  children: [
+                    Icon(
+                      Icons.shopping_cart,
+
+                    ),
+                    Positioned(
+                        child: CircleAvatar(
+                          radius: 9,
+                          backgroundColor: Colors.red,
+                          child: Center(child: Text(getIt<CartCubit>().cartList.length.toString(),style: const TextStyle(color: Colors.white,fontSize: 12),)),
+                        )
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+        ],
+      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: SingleChildScrollView(

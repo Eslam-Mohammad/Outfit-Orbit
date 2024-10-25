@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 
+
+
 class SearchBarBuilder extends StatelessWidget {
   const SearchBarBuilder({super.key,required this.searchController});
  final TextEditingController searchController;
   @override
   Widget build(BuildContext context) {
     return SearchBar(
+
       onSubmitted: (value){
-        print(value);
+        print("******************** $value");
+
+
       },
       onChanged: (value){
-        print(value);
+
       },
 
       hintStyle: const WidgetStatePropertyAll(TextStyle(color: Colors.grey)),
