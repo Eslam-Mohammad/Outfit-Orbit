@@ -7,6 +7,10 @@ import 'package:e_commerce_app/features/home/domain/entities/home_entity.dart';
 import 'package:e_commerce_app/features/home/presentation/pages/home.dart';
 import 'package:e_commerce_app/features/home/presentation/pages/item_details_screen.dart';
 import 'package:e_commerce_app/features/onBoarding/onboarding_screen.dart';
+import 'package:e_commerce_app/features/profile/presentation/pages/help_center_screen.dart';
+import 'package:e_commerce_app/features/profile/presentation/pages/my_account_screen.dart';
+import 'package:e_commerce_app/features/profile/presentation/pages/notification_screen.dart';
+import 'package:e_commerce_app/features/profile/presentation/pages/settings_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,6 +30,10 @@ const String loginPath = "/login";
 const String signUpPath = "/signup";
 const String resetPasswordPath = "/resetPassword";
 const String itemDetailsPath = "/itemDetails";
+const String myAccountPath = "/myAccount";
+const String helpCenterPath = "/helpCenter";
+const String settingsPath = "/settings";
+const String notificationPath = "/notification";
 
 
 final GoRouter router = GoRouter(
@@ -79,5 +87,24 @@ final GoRouter router = GoRouter(
               return     ItemDetailsScreen(product: product);
         },
     ),
+    GoRoute(
+      path:myAccountPath,
+    builder:  (context,state)=>const MyAccountScreen(),
+    ),
+    GoRoute(
+      path: helpCenterPath,
+      builder: (context, state) => const HelpCenterScreen(),
+    ),
+    GoRoute(
+      path: settingsPath,
+      builder: (context, state) => const SettingsScreen(),
+    ),
+    GoRoute(
+      path: notificationPath,
+      builder: (context, state) => const NotificationScreen(),
+    ),
 
-  ],);
+
+
+  ],
+);

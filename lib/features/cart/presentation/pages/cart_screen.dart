@@ -141,7 +141,7 @@ class CartScreen extends StatelessWidget {
                                                 .addProductToCart(product);
                                           }
                                         },
-                                        icon: Icon(Icons.remove_shopping_cart),
+                                        icon: const Icon(Icons.remove_shopping_cart),
                                       )
                                     ],
                                   ),

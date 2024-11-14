@@ -7,6 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../../../core/routes/app_router.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -28,12 +31,16 @@ class Home extends StatelessWidget {
               IconButton(
                 iconSize: 28,
                 icon: const Icon(Icons.notifications),
-                onPressed: () {},
+                onPressed: () {
+                   GoRouter.of(context).push(notificationPath);
+                },
               ),
               IconButton(
                 iconSize: 28,
                 icon: const Icon(Icons.search),
-                onPressed: () {},
+                onPressed: () {
+                  getIt<HomeCubit>().changeIndex(3);
+                },
               ),
             ],
           ),

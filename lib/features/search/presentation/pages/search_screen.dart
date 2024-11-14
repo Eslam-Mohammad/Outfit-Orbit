@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
@@ -7,7 +6,7 @@ import 'package:shimmer/shimmer.dart';
 import '../../../../core/services/service_locator_get_it.dart';
 import '../../../cart/presentation/manager/cart_cubit.dart';
 import '../../../home/presentation/widgets/price_widget.dart';
-import '../../../home/presentation/widgets/search_bar_builder.dart';
+
 import '../../../wishlist/presentation/manager/wishlist_cubit.dart';
 import '../../../wishlist/presentation/manager/wishlist_state.dart';
 import '../manager/search_cubit.dart';
@@ -15,7 +14,7 @@ import '../manager/search_state.dart';
 
 class SearchScreen extends StatelessWidget {
    SearchScreen({super.key});
-TextEditingController searchController2 = TextEditingController();
+final TextEditingController searchController2 = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +24,7 @@ final size = MediaQuery.of(context).size;
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             // search bar
@@ -47,7 +46,7 @@ final size = MediaQuery.of(context).size;
               leading: const Icon(Icons.search,color: Colors.grey,),
 
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             // search result
@@ -166,7 +165,7 @@ final size = MediaQuery.of(context).size;
                                                 .addProductToCart(product);
                                           }
                                         },
-                                        icon: Icon(Icons.remove_shopping_cart),
+                                        icon: const Icon(Icons.remove_shopping_cart),
                                       )
                                     ],
                                   ),

@@ -127,7 +127,7 @@ class AuthRemoteDataSource {
          // Once signed in, return the UserCredential
           final userCredential=await FirebaseAuth.instance.signInWithCredential(credential);
           print("******************************** User made *************${userCredential.user!.email}");
-         print("******************************** User made *************${userCredential.user!}");
+         print("******************************** User made *************${userCredential.user}");
          print("******************************** User made *************${FirebaseAuth.instance.currentUser!}");
 
          return AuthModel.fromFirebaseUser(userCredential.user!);

@@ -64,7 +64,7 @@ class AuthCubit extends Cubit<AuthState> {
               "email":authEntity.email,
               "displayName":authEntity.displayName,
               "uid":authEntity.id,
-              "photoURL":authEntity.photoUrl,
+              "imageUrl":authEntity.imageUrl,
               "phoneNumber":authEntity.phoneNumber,
             });
             theUserInformation = authEntity;

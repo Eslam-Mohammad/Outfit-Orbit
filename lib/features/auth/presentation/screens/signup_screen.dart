@@ -141,7 +141,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                   const SizedBox(
                     height: 8,),
-                  const Text("---------------------- or continue with ----------------------"),
+                  const Text("--------- or continue with ---------"),
                   const SizedBox(
                     height: 8,),
                   Row(

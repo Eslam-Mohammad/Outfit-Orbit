@@ -8,7 +8,7 @@ class AuthModel extends AuthEntity {
     required super.id,
     required super.email,
     required super.displayName,
-    super.photoUrl,
+    super.imageUrl,
     super.phoneNumber,
   });
 
@@ -20,7 +20,7 @@ class AuthModel extends AuthEntity {
       id: firebaseUser.uid,
       email: firebaseUser.email,
       displayName: firebaseUser.displayName,
-      photoUrl: firebaseUser.photoURL,
+
       phoneNumber: firebaseUser.phoneNumber,
     );
   }
@@ -30,7 +30,7 @@ class AuthModel extends AuthEntity {
       id: json['id'],
       email: json['email'],
       displayName: json['displayName'],
-      photoUrl: json['photoUrl'],
+      imageUrl: json['imageUrl'],
       phoneNumber: json['phoneNumber'],
     );
   }
@@ -42,7 +42,7 @@ class AuthModel extends AuthEntity {
       'id': id,
       'email': email,
       'displayName': displayName,
-      'photoUrl': photoUrl,
+      'imageUrl': imageUrl,
       'phoneNumber': phoneNumber,
     };
   }

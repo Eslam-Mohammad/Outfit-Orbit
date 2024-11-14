@@ -9,6 +9,7 @@ class SearchBarBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     return SearchBar(
 
+
       onSubmitted: (value){
         print("******************** $value");
 

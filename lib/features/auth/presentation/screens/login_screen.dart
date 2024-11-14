@@ -89,6 +89,7 @@ class LoginScreen extends StatelessWidget {
                             if(FirebaseAuth.instance.currentUser!.emailVerified) {
                               getIt<AuthCubit>().addUserInfo({
                                 "email": FirebaseAuth.instance.currentUser!.email,
+                                "uid": FirebaseAuth.instance.currentUser!.uid,
 
                               });
                               GoRouter.of(context).pushReplacement(homePath);
@@ -120,7 +121,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                       const SizedBox(
                         height: 10,),
-                      const Text("---------------------- or continue with ----------------------"),
+                      const Text("--------- or continue with --------"),
                       const SizedBox(
                         height: 10,),
                       Row(

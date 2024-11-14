@@ -34,11 +34,11 @@ class ItemDetailsScreen extends StatelessWidget {
             if(getIt<CartCubit>().cartList.contains(product)){
               getIt<CartCubit>().removeProductFromCart(product);
               ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text("Removed from Cart")));
+                  const SnackBar(content: Text("Removed from Cart")));
             }else{
               getIt<CartCubit>().addProductToCart(product);
               ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text("Added to Cart")));
+                  const SnackBar(content: Text("Added to Cart")));
             }
           },
           child: const Icon(
@@ -58,11 +58,11 @@ class ItemDetailsScreen extends StatelessWidget {
               if(getIt<WishlistCubit>().wishlist.contains(product)){
                 getIt<WishlistCubit>().removeProductFromWishlist(product);
                 ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text("Removed from Wishlist")));
+                    const SnackBar(content: Text("Removed from Wishlist")));
               }else{
                 getIt<WishlistCubit>().addProductToWishlist(product);
                 ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text("Added to Wishlist")));
+                    const SnackBar(content: Text("Added to Wishlist")));
               }
             },
             icon: Icon(
@@ -83,7 +83,7 @@ class ItemDetailsScreen extends StatelessWidget {
                 },
                 icon:  Stack(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.shopping_cart,
 
                     ),
