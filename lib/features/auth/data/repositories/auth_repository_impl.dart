@@ -21,7 +21,8 @@ class AuthRepositoryImpl extends AuthRepository {
   Future<Either<Failure, AuthEntity>> signInWithEmailAndPassword({required String email, required String password}) async{
    if(await networkInfo.isConnected!){
      try{
-       final user = await remoteDataSource.signInWithEmailAndPassword(email: email, password: password);
+       var user = await remoteDataSource.signInWithEmailAndPassword(email: email, password: password);
+       user.documentId= await remoteDataSource.bringUserDocumentId();
        localDataSource.cacheAuth(user);
        return Right(user);
      }on ServerException catch (e)

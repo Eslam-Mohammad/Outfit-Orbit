@@ -5,6 +5,7 @@ import 'package:e_commerce_app/features/home/presentation/manager/home_state.dar
 import 'package:e_commerce_app/generated/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:go_router/go_router.dart';
@@ -20,6 +21,7 @@ class Home extends StatelessWidget {
     final Size size = MediaQuery
         .of(context)
         .size;
+    FlutterNativeSplash.remove();
     return BlocBuilder<HomeCubit, HomeStates>(
       builder: (context, state) {
         return Scaffold(

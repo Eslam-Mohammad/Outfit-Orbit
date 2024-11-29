@@ -5,11 +5,15 @@ import 'package:e_commerce_app/features/auth/domain/entities/auth_entitiy.dart';
 
 class AuthModel extends AuthEntity {
   AuthModel({
-    required super.id,
+    required super.uid,
     required super.email,
-    required super.displayName,
+    super.documentId,
+    super.displayName,
     super.imageUrl,
     super.phoneNumber,
+    super.address,
+    super.paymentMethods,
+    super.orderHistory,
   });
 
 
@@ -17,9 +21,10 @@ class AuthModel extends AuthEntity {
 
   factory AuthModel.fromFirebaseUser(firebaseUser) {
     return AuthModel(
-      id: firebaseUser.uid,
+      uid: firebaseUser.uid,
       email: firebaseUser.email,
       displayName: firebaseUser.displayName,
+
 
       phoneNumber: firebaseUser.phoneNumber,
     );
@@ -27,11 +32,15 @@ class AuthModel extends AuthEntity {
 
   factory AuthModel.fromJson(Map<String, dynamic> json) {
     return AuthModel(
-      id: json['id'],
+      uid: json['uid'],
       email: json['email'],
+      documentId: json['documentId'],
       displayName: json['displayName'],
       imageUrl: json['imageUrl'],
       phoneNumber: json['phoneNumber'],
+      address: json['address'],
+      paymentMethods: json['paymentMethods'],
+      orderHistory: json['orderHistory'],
     );
   }
 
@@ -39,11 +48,15 @@ class AuthModel extends AuthEntity {
 
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
+      'uid': uid,
       'email': email,
+      'documentId': documentId,
       'displayName': displayName,
       'imageUrl': imageUrl,
       'phoneNumber': phoneNumber,
+      'address': address,
+      'paymentMethods': paymentMethods,
+      'orderHistory': orderHistory,
     };
   }
 }

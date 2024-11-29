@@ -1,4 +1,6 @@
 
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_commerce_app/features/auth/domain/entities/auth_entitiy.dart';
 import '../../domain/usecases/reset_password.dart';
@@ -48,6 +50,7 @@ class AuthCubit extends Cubit<AuthState> {
           (failure) => emit(SignInFailure(message: failure.errMessage)),
           (authEntity)  {
             theUserInformation = authEntity;
+            log("*****************${theUserInformation?.documentId??"no document id found"}");
             emit(SignInSuccess(authEntity: authEntity));
           },
     );
@@ -63,7 +66,7 @@ class AuthCubit extends Cubit<AuthState> {
             addUserInfo({
               "email":authEntity.email,
               "displayName":authEntity.displayName,
-              "uid":authEntity.id,
+              "uid":authEntity.uid,
               "imageUrl":authEntity.imageUrl,
               "phoneNumber":authEntity.phoneNumber,
             });
@@ -120,7 +123,7 @@ class AuthCubit extends Cubit<AuthState> {
 
 Future<void> addUserInfo(Map<String, dynamic> userInfo) async {
   CollectionReference users = FirebaseFirestore.instance.collection('users');
-  QuerySnapshot querySnapshot = await users.where('email', isEqualTo: userInfo['email']).get();
+  QuerySnapshot querySnapshot = await users.where('uid', isEqualTo: userInfo['uid']).get();
 
   if (querySnapshot.docs.isEmpty) {
     await users.add(userInfo)

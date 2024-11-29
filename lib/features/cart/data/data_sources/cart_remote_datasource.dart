@@ -5,6 +5,8 @@ import 'package:e_commerce_app/features/home/data/models/home_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../../../core/errors/error_model.dart';
+import '../../../../core/services/service_locator_get_it.dart';
+import '../../../auth/presentation/cubit/auth_cubit.dart';
 
 class CartRemoteDataSource{
 
@@ -13,23 +15,13 @@ class CartRemoteDataSource{
 
   Future<Unit> addProductIdToCartList( int productId) async {
     try {
-      print("***************************  remote method start");
-      // Query the collection to find the document with the specified email
-      print("*********************");
-      print(FirebaseAuth.instance.currentUser!.email);
-      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-          .collection('users')
-          .where('email', isEqualTo: FirebaseAuth.instance.currentUser!.email)
-          .get();
 
-      print ("***************************  remote method after query");
-
-      if (querySnapshot.docs.isNotEmpty) {
+      if (getIt<AuthCubit>().theUserInformation!.documentId  != null) {
         // Get the document ID
-        String documentId = querySnapshot.docs.first.id;
+
 
         // Add or update the field in the found document
-        await FirebaseFirestore.instance.collection('users').doc(documentId).update(
+        await FirebaseFirestore.instance.collection('users').doc(getIt<AuthCubit>().theUserInformation!.documentId).update(
           {'cart': FieldValue.arrayUnion([productId])},
         );
         print('Field added/updated successfully');
@@ -49,17 +41,14 @@ class CartRemoteDataSource{
   Future<Unit> removeProductIdFromCartList( int productId) async {
     try {
       // Query the collection to find the document with the specified email
-      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-          .collection('users')
-          .where('email', isEqualTo: FirebaseAuth.instance.currentUser!.email)
-          .get();
 
-      if (querySnapshot.docs.isNotEmpty) {
+
+      if (getIt<AuthCubit>().theUserInformation!.documentId !=null) {
         // Get the document ID
-        String documentId = querySnapshot.docs.first.id;
+
 
         // Add or update the field in the found document
-        await FirebaseFirestore.instance.collection('users').doc(documentId).update(
+        await FirebaseFirestore.instance.collection('users').doc(getIt<AuthCubit>().theUserInformation!.documentId).update(
           {'cart': FieldValue.arrayRemove([productId])},
         );
         print('Field added/updated successfully');
@@ -81,7 +70,7 @@ class CartRemoteDataSource{
       // Query the collection to find the document with the specified email
       QuerySnapshot querySnapshot = await FirebaseFirestore.instance
           .collection('users')
-          .where('email', isEqualTo: FirebaseAuth.instance.currentUser!.email)
+          .where('uid', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
           .get();
 
       if (querySnapshot.docs.isNotEmpty) {

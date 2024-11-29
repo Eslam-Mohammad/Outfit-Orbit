@@ -67,7 +67,7 @@ class WishlistScreen extends StatelessWidget {
                               },
                             ),
                           ),
-                          const SizedBox(width: 20),
+                          const SizedBox(width: 10),
                           SizedBox(
                             width: size.width * 0.4,
                             child: Column(
@@ -93,12 +93,12 @@ class WishlistScreen extends StatelessWidget {
                                         color: Colors.amber,
                                       ),
                                       itemCount: 5,
-                                      itemSize: 20.0,
+                                      itemSize: 15.0,
                                       direction: Axis.horizontal,
                                     ),
                                     const Spacer(),
                                     IconButton(
-                                      iconSize: 35,
+                                      iconSize: 30,
                                       onPressed: () {
 
 

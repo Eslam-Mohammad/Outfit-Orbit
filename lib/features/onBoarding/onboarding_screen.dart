@@ -4,11 +4,19 @@ import 'package:e_commerce_app/features/onBoarding/boarding_widgets/boarding_bod
 import 'package:e_commerce_app/features/onBoarding/boarding_widgets/skip.dart';
 import 'package:e_commerce_app/features/onBoarding/boarding_widgets/smooth_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:go_router/go_router.dart';
 
 class OnBoardingScreen extends StatelessWidget {
-   OnBoardingScreen({super.key});
-  final pageController = PageController();
+   OnBoardingScreen({super.key}){
+
+
+       WidgetsBinding.instance.addPostFrameCallback((_) {
+         FlutterNativeSplash.remove();
+       });
+
+   } 
+  final PageController pageController = PageController();
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -17,10 +25,10 @@ class OnBoardingScreen extends StatelessWidget {
         child: Column(
           children: [
             SkipButtonWidget(size: size),
-            SizedBox(height: size.height * 0.1),
+            SizedBox(height: size.height * 0.08),
 
             OnBoardingBody(pageController: pageController),
-            SizedBox(height: size.height * 0.04),
+
 
 
             Row(children: [

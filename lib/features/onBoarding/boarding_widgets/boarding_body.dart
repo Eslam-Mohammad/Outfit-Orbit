@@ -2,6 +2,7 @@ import 'package:e_commerce_app/core/constants/app_colors.dart';
 import 'package:e_commerce_app/core/constants/app_text_styles.dart';
 import 'package:e_commerce_app/generated/assets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class OnBoardingBody extends StatelessWidget {
@@ -9,6 +10,7 @@ class OnBoardingBody extends StatelessWidget {
    final PageController pageController;
   @override
   Widget build(BuildContext context) {
+
     return SizedBox(
       height: 590,
       child: PageView(
@@ -16,7 +18,7 @@ class OnBoardingBody extends StatelessWidget {
         children: [
           Column(
             children: [
-              SvgPicture.asset(Assets.imagesBoard1),
+               SvgPicture.asset(Assets.imagesBoard1),
               const SizedBox(height: 20),
               Text("Choose Products", style: AppTextStyles.poppins500style24.copyWith(fontSize: 30,fontWeight: FontWeight.w700)),
               const SizedBox(height: 20),

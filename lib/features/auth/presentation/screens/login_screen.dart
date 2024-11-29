@@ -46,7 +46,7 @@ class LoginScreen extends StatelessWidget {
               children: [
                 // image in the top
                const SizedBox(height: 15,),
-               Image.asset("assets/images/cart1.png",height: 250,width: 290,),
+               Image.asset("assets/images/cart1.png",height: 220,width: 260,),
 
 
 
@@ -56,13 +56,13 @@ class LoginScreen extends StatelessWidget {
                     children: [
                       // welcome text
                       Padding(
-                        padding: const EdgeInsets.only(top:20.0,bottom: 35.0 ),
+                        padding: const EdgeInsets.only(top:15.0,bottom: 30.0 ),
                         child: Text("   Welcome Back !",
                           style: AppTextStyles.poppins500style24.copyWith(fontWeight: FontWeight.w600,fontSize: 30.0),),
                       ),
                       //Email Field
                       CustomEmailTextField(emailController: emailController, color: AppColors.fontGrey),
-                      const SizedBox(height: 25,),
+                      const SizedBox(height: 22,),
                       //Password Field
                       CustomPasswordTextField(passwordController: passwordController, color:  AppColors.fontGrey),
                       const SizedBox(height: 15,),
@@ -79,7 +79,7 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 50,),
+                      const SizedBox(height: 45,),
                       //Login Button
             
                       BlocConsumer<AuthCubit, AuthState>(
@@ -94,10 +94,11 @@ class LoginScreen extends StatelessWidget {
                               });
                               GoRouter.of(context).pushReplacement(homePath);
                               ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(content: Text("Sign In Success"),backgroundColor: Colors.green,));
+                                  const SnackBar(content: Text("              Sign In Success"),backgroundColor: Colors.green,));
                             }else {
                               ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(content: Text("Verify your account"),backgroundColor: Colors.red,));
+                              FirebaseAuth.instance.currentUser!.sendEmailVerification();
                               FirebaseAuth.instance.signOut();
                             }
             
@@ -123,7 +124,7 @@ class LoginScreen extends StatelessWidget {
                         height: 10,),
                       const Text("--------- or continue with --------"),
                       const SizedBox(
-                        height: 10,),
+                        height: 5,),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [

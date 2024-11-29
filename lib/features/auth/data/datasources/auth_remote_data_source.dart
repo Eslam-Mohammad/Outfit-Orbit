@@ -1,5 +1,6 @@
 
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:e_commerce_app/core/errors/error_model.dart';
 import 'package:e_commerce_app/core/errors/exceptions.dart';
@@ -10,6 +11,22 @@ import 'package:google_sign_in/google_sign_in.dart';
 class AuthRemoteDataSource {
 
   AuthRemoteDataSource();
+
+
+  Future<String> bringUserDocumentId()async{
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection('users')
+        .where('uid', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .get();
+
+    if (querySnapshot.docs.isNotEmpty) {
+      // Get the document ID
+      String document_Id = querySnapshot.docs.first.id;
+      return document_Id;
+    }
+    return "";
+
+  }
 
    Future<AuthModel> signInWithEmailAndPassword  ({required String email, required String password}) async{
     try {
@@ -35,7 +52,7 @@ class AuthRemoteDataSource {
 
       }
       else{
-        print("*********************************************${e.toString()}");
+        print("*******************problem 1**************************${e.toString()}");
         throw ServerException( ErrorModel(status:0 ,errorMessage: 'Try Again Later'));
       }
     } catch (e) {
@@ -87,7 +104,7 @@ class AuthRemoteDataSource {
       }
       else{
         print("*********************************************problem happen in converting in remotedata");
-        print("*********************************************${e.toString()}");
+        print("*******************problem 2**************************${e.toString()}");
         throw ServerException( ErrorModel(status:0 ,errorMessage: 'Try Again Later'));
       }
     } catch (e) {

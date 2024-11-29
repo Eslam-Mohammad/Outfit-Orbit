@@ -4,7 +4,10 @@ import 'package:e_commerce_app/core/errors/exceptions.dart';
 import 'package:e_commerce_app/features/home/data/models/home_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+
 import '../../../../core/errors/error_model.dart';
+import '../../../../core/services/service_locator_get_it.dart';
+import '../../../auth/presentation/cubit/auth_cubit.dart';
 
 class WishlistRemoteDataSource{
 
@@ -13,34 +16,22 @@ class WishlistRemoteDataSource{
 
   Future<Unit> addProductIdToWishlist( int productId) async {
     try {
-      print("***************************  remote method start");
-      // Query the collection to find the document with the specified email
-      print("*********************");
-      print(FirebaseAuth.instance.currentUser!.email);
-      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-          .collection('users')
-          .where('email', isEqualTo: FirebaseAuth.instance.currentUser!.email)
-          .get();
 
-      print ("***************************  remote method after query");
 
-      if (querySnapshot.docs.isNotEmpty) {
-        // Get the document ID
-        String documentId = querySnapshot.docs.first.id;
+      if (getIt<AuthCubit>().theUserInformation!.documentId != null) {
 
-        // Add or update the field in the found document
-        await FirebaseFirestore.instance.collection('users').doc(documentId).update(
+        await FirebaseFirestore.instance.collection('users').doc(getIt<AuthCubit>().theUserInformation!.documentId).update(
           {'wishlist': FieldValue.arrayUnion([productId])},
         );
-        print('Field added/updated successfully');
+
         return unit;
       } else {
-        print('Document not found');
+
         throw ServerException(ErrorModel(errorMessage: "user not found",status: 500));
       }
 
     } catch (e) {
-      print("***************************  remote method will throw");
+
      throw ServerException(ErrorModel(errorMessage: e.toString(),status: 500));
     }
   }
@@ -49,17 +40,14 @@ class WishlistRemoteDataSource{
   Future<Unit> removeProductIdFromWishlist( int productId) async {
     try {
       // Query the collection to find the document with the specified email
-      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-          .collection('users')
-          .where('email', isEqualTo: FirebaseAuth.instance.currentUser!.email)
-          .get();
 
-      if (querySnapshot.docs.isNotEmpty) {
+
+      if (getIt<AuthCubit>().theUserInformation!.documentId != null) {
         // Get the document ID
-        String documentId = querySnapshot.docs.first.id;
+
 
         // Add or update the field in the found document
-        await FirebaseFirestore.instance.collection('users').doc(documentId).update(
+        await FirebaseFirestore.instance.collection('users').doc(getIt<AuthCubit>().theUserInformation!.documentId).update(
           {'wishlist': FieldValue.arrayRemove([productId])},
         );
         print('Field added/updated successfully');
@@ -81,7 +69,7 @@ class WishlistRemoteDataSource{
       // Query the collection to find the document with the specified email
       QuerySnapshot querySnapshot = await FirebaseFirestore.instance
           .collection('users')
-          .where('email', isEqualTo: FirebaseAuth.instance.currentUser!.email)
+          .where('uid', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
           .get();
 
       if (querySnapshot.docs.isNotEmpty) {

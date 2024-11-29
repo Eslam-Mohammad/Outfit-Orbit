@@ -63,11 +63,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 children: [
                   //Welcome Text
                   Padding(
-                    padding: const EdgeInsets.only(top:100 ),
+                    padding: const EdgeInsets.only(top:70 ),
                     child: Text("Welcome !",
                     style: AppTextStyles.poppins500style24.copyWith(fontWeight: FontWeight.w600,fontSize: 30.0),),
                   ),
-                  const SizedBox(height: 40,),
+                  const SizedBox(height: 30,),
 
                   //First Name Field
                   CustomNameTextField(NameController: firstNameController, color: AppColors.fontGrey, identifyName: "First"),
@@ -83,7 +83,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                   //Password Field
                   CustomPasswordTextField(passwordController: passwordController, color: AppColors.fontGrey),
-                  const SizedBox(height: 25,),
+                  const SizedBox(height: 15,),
 
 
                   //Terms and Conditions
@@ -101,7 +101,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   );
   },
 ),
-                  const SizedBox(height: 60,),
+                  const SizedBox(height: 50,),
 
                   BlocConsumer<AuthCubit,AuthState>(
                       builder: (context, state){
