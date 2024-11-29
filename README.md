@@ -1,4 +1,4 @@
-# eCommerce App 🛒
+# Outfit Orbit App 🛒
 A modern, feature-rich eCommerce mobile application built with Flutter, designed to provide a seamless online shopping experience.
 
 # 📱 Features
