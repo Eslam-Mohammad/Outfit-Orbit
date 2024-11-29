@@ -49,7 +49,8 @@ class AuthRepositoryImpl extends AuthRepository {
     if(await networkInfo.isConnected!){
       try{
         print("*********************************************trying repositoryimpl method in sign in with google");
-        final user = await remoteDataSource.signInWithGoogle();
+        var user = await remoteDataSource.signInWithGoogle();
+        user.documentId= await remoteDataSource.bringUserDocumentId();
         print("****************didnot go to cache");
         localDataSource.cacheAuth(user);
         return Right(user);
