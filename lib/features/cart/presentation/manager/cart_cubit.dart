@@ -21,6 +21,7 @@ class CartCubit extends Cubit<CartState>{
 
   List<ProductEntity> cartList = [];
   void getCart() async {
+    cartList = [];
     emit(CartLoading());
     final result = await getCartList();
     result.fold(

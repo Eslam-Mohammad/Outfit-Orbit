@@ -3,6 +3,9 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_commerce_app/features/auth/domain/entities/auth_entitiy.dart';
+import 'package:e_commerce_app/features/cart/presentation/manager/cart_cubit.dart';
+import 'package:e_commerce_app/features/wishlist/presentation/manager/wishlist_cubit.dart';
+import '../../../../core/services/service_locator_get_it.dart';
 import '../../domain/usecases/reset_password.dart';
 import '../../domain/usecases/signin_google.dart';
 import '../../domain/usecases/signin_with_email_password.dart';
@@ -52,6 +55,8 @@ class AuthCubit extends Cubit<AuthState> {
             theUserInformation = authEntity;
             log("*****************${theUserInformation?.documentId??"no document id found"}");
             emit(SignInSuccess(authEntity: authEntity));
+            getIt<CartCubit>().getCart();
+            getIt<WishlistCubit>().getWishlist();
           },
     );
   }
@@ -72,6 +77,8 @@ class AuthCubit extends Cubit<AuthState> {
             });
             theUserInformation = authEntity;
             emit(GoogleSuccess(authEntity: authEntity));
+            getIt<CartCubit>().getCart();
+            getIt<WishlistCubit>().getWishlist();
           },
     );
   }

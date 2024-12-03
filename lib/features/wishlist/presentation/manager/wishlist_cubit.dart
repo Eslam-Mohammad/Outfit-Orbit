@@ -28,6 +28,7 @@ class WishlistCubit extends Cubit<WishlistState>{
 
   List<ProductEntity> wishlist = [];
   void getWishlist()async{
+    wishlist= [];
     emit(WishlistLoading());
     final result = await getWhishlist();
     result.fold((l) {
