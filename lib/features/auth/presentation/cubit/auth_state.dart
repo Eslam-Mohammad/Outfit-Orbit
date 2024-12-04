@@ -51,3 +51,9 @@ final class ResetPasswordFailure extends AuthState {
   ResetPasswordFailure({required this.message});
 }
 
+final class GetAdminStatusLoading extends AuthState {}
+final class GetAdminStatusSuccess extends AuthState {}
+final class GetAdminStatusFailure extends AuthState {
+  final String message;
+  GetAdminStatusFailure({required this.message});
+}

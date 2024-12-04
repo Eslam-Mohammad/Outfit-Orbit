@@ -133,6 +133,20 @@ class AuthRepositoryImpl extends AuthRepository {
 
   }
 
+  @override
+  Future<Either<Failure, bool>> getAdminStatus()async {
+    if(await networkInfo.isConnected!) {
+      try{
+        final status =await remoteDataSource.getAdminStatus();
+        return Right(status);
+      }on ServerException catch (e){
+        return Left(Failure(errMessage: e.errorModel.errorMessage));
+      }
+    }else{
+      return Left(Failure(errMessage: "No Internet Connection"));
+    }
+  }
+
 
 
 

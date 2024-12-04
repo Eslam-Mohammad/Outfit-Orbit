@@ -90,6 +90,7 @@ class LoginScreen extends StatelessWidget {
                               getIt<AuthCubit>().addUserInfo({
                                 "email": FirebaseAuth.instance.currentUser!.email,
                                 "uid": FirebaseAuth.instance.currentUser!.uid,
+                                "displayName":cutStringBeforeAt(FirebaseAuth.instance.currentUser!.email!),
 
                               });
                               GoRouter.of(context).pushReplacement(homePath);
@@ -169,4 +170,12 @@ class LoginScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+
+String cutStringBeforeAt(String input) {
+  if (input.contains('@')) {
+    return input.split('@')[0];
+  }
+  return input; // Return the original string if '@' is not found
 }

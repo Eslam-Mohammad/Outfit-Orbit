@@ -12,6 +12,19 @@ class AuthRemoteDataSource {
 
   AuthRemoteDataSource();
 
+  Future<bool> getAdminStatus()async{
+    try{
+      QuerySnapshot query =await FirebaseFirestore.instance.collection('admins').where('admin', isEqualTo: FirebaseAuth.instance.currentUser!.uid).get();
+      if(query.docs.isNotEmpty){
+        return Future.value(true);
+      }else{
+        return Future.value(false);
+      }
+    }catch(e){
+      throw ServerException( ErrorModel(status:0 ,errorMessage: "Server Error"));
+    }
+
+  }
 
   Future<String> bringUserDocumentId()async{
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance

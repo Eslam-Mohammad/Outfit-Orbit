@@ -1,5 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_commerce_app/core/constants/app_colors.dart';
 import 'package:e_commerce_app/features/auth/presentation/cubit/auth_cubit.dart';
+import 'package:e_commerce_app/features/chat/data/data_sources/chat_remote_data_source.dart';
+import 'package:e_commerce_app/features/chat/presentation/manager/chat_cubit.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -15,6 +19,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../generated/assets.dart';
 import '../../../auth/presentation/cubit/auth_state.dart';
+import '../../../chat/presentation/manager/chat_state.dart';
 
 
 class ProfileScreen extends StatelessWidget {
@@ -52,6 +57,27 @@ class ProfileScreen extends StatelessWidget {
               },
             ),
             ProfileMenu(
+              text: "Chat",
+              icon: Icon(Icons.chat),
+              press: () async {
+                await getIt<AuthCubit>().checkAdminStatus();
+                if(getIt<AuthCubit>().isAdmin==true){
+                  GoRouter.of(context).push(adminChatPath);
+
+                }else{
+                  Stream<QuerySnapshot> messageStream=
+                  FirebaseFirestore.instance.collection('chats')
+                      .doc(await ChatRemoteDataSource().getDocumentIdOfChat(FirebaseAuth.instance.currentUser!.uid))
+                      .collection("messages").orderBy("time",descending: true).snapshots();
+                  GoRouter.of(context).push(chatPath ,extra:{
+                    "messagesStream":messageStream,
+                    "userIdToChatWith":"",
+                  } );
+                }
+
+              },
+            ),
+            ProfileMenu(
               text: "Settings",
               icon: Icon(Icons.settings),
               press: () {
@@ -82,14 +108,12 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   );
                 }
-
               },
               child: ProfileMenu(
                 text: "Log Out",
                 icon: Icon(Icons.logout),
                 press: () {
                   getIt<AuthCubit>().signOutUser();
-
                 },
               ),
             ),

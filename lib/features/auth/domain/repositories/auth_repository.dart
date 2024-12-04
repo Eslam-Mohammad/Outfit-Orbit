@@ -17,6 +17,7 @@ abstract class AuthRepository {
   Future <Either<Failure,Unit>> signOut();
 
   Future <Either<Failure,Unit>> resetPassword({required String email});
+  Future<Either<Failure,bool>> getAdminStatus();
 
 }
 

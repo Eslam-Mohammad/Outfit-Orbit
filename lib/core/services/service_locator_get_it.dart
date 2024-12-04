@@ -1,6 +1,7 @@
 
 import 'package:e_commerce_app/core/connection/network_info.dart';
 import 'package:e_commerce_app/features/auth/domain/repositories/auth_repository.dart';
+import 'package:e_commerce_app/features/auth/domain/usecases/get_admin_status.dart';
 import 'package:e_commerce_app/features/home/data/data_sources/home_remote_datasource.dart';
 import 'package:e_commerce_app/features/home/data/repositories/home_repository_impl.dart';
 import 'package:e_commerce_app/features/home/domain/repositories/home_repository.dart';
@@ -31,6 +32,14 @@ import '../../features/cart/presentation/manager/cart_cubit.dart';
 
 
 
+import '../../features/chat/data/data_sources/chat_remote_data_source.dart';
+import '../../features/chat/data/repositories/chat_repository_impl.dart';
+import '../../features/chat/domain/repositories/chat_repository.dart';
+import '../../features/chat/domain/use_cases/delete_chat.dart';
+import '../../features/chat/domain/use_cases/delete_message.dart';
+import '../../features/chat/domain/use_cases/send_admin_message.dart';
+import '../../features/chat/domain/use_cases/send_user_message.dart';
+import '../../features/chat/presentation/manager/chat_cubit.dart';
 import '../../features/search/presentation/manager/search_cubit.dart';
 import '../../features/wishlist/data/data_sources/wishlist_local_datasource.dart';
 import '../../features/wishlist/data/data_sources/wishlist_remote_datasource.dart';
@@ -63,6 +72,7 @@ void setup() {
   getIt.registerLazySingleton<SignOut>(() => SignOut(getIt()));
   getIt.registerLazySingleton<ResetPassword>(() => ResetPassword(getIt()));
   getIt.registerLazySingleton<SignUpWithEmailAndPassword>(() => SignUpWithEmailAndPassword(getIt()));
+  getIt.registerLazySingleton<GetAdminStatus>(() => GetAdminStatus(getIt()));
 
   // Auth Cubit
   getIt.registerSingleton<AuthCubit>(AuthCubit(
@@ -71,6 +81,7 @@ void setup() {
     signOut: getIt(),
     resetPassword: getIt(),
     signUpWithEmailAndPassword: getIt(),
+    getAdminStatus: getIt(),
   ));
   ///////////////////////////////////////////////////////////////////////////////////////
   // wishlist data sources
@@ -138,6 +149,27 @@ void setup() {
   ////////////////////////////////////////////////////////////////////////////////////////
   // search cubit
    getIt.registerSingleton<SearchCubit>(SearchCubit());
+
+  ////////////////////////////////////////////////////////////////////////////////////////
+  // chat cubit
+  getIt.registerLazySingleton<ChatRemoteDataSource>(()=> ChatRemoteDataSource());
+  // chat repository
+  getIt.registerLazySingleton<ChatRepository>(()=> ChatRepositoryImpl(
+    networkInfo: getIt(),
+    chatRemoteDataSource: getIt(),
+  ));
+  // chat usecases
+  getIt.registerLazySingleton<DeleteChat>(() => DeleteChat(getIt()));
+  getIt.registerLazySingleton<DeleteMessage>(() => DeleteMessage(getIt()));
+  getIt.registerLazySingleton<SendUserMessage>(() => SendUserMessage(getIt()));
+  getIt.registerLazySingleton<SendAdminMessage>(() => SendAdminMessage(getIt()));
+  // chat cubit
+  getIt.registerLazySingleton<ChatCubit>(()=>ChatCubit(
+    deleteChat: getIt(),
+    deleteMessage: getIt(),
+    sendUserMessage: getIt(),
+    sendAdminMessage: getIt(),
+  ));
 
 
 }

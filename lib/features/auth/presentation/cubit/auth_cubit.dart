@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_commerce_app/features/auth/domain/entities/auth_entitiy.dart';
+import 'package:e_commerce_app/features/auth/domain/usecases/get_admin_status.dart';
 import 'package:e_commerce_app/features/cart/presentation/manager/cart_cubit.dart';
 import 'package:e_commerce_app/features/wishlist/presentation/manager/wishlist_cubit.dart';
 import '../../../../core/services/service_locator_get_it.dart';
@@ -23,16 +24,20 @@ class AuthCubit extends Cubit<AuthState> {
   final SignOut signOut;
   final ResetPassword resetPassword;
   final SignUpWithEmailAndPassword signUpWithEmailAndPassword;
+  final GetAdminStatus getAdminStatus;
 
 
 
   AuthCubit(
       {
+
       required this.signInWithGoogle,
       required this.signInWithEmailAndPassword,
       required this.signOut,
       required this.resetPassword,
-      required this.signUpWithEmailAndPassword}) : super(AuthInitial());
+      required this.signUpWithEmailAndPassword,
+      required this.getAdminStatus,
+      }) : super(AuthInitial());
 
 
 
@@ -41,6 +46,20 @@ class AuthCubit extends Cubit<AuthState> {
     isAgreed = value;
     emit(CheckAuth());
   }
+  bool? isAdmin;
+
+  Future<void> checkAdminStatus() async {
+    final result = await getAdminStatus();
+    result.fold(
+          (failure) => emit(GetAdminStatusFailure(message: failure.errMessage)),
+          (status) {
+            isAdmin = status;
+            emit(GetAdminStatusSuccess());
+          },
+    );
+  }
+
+
 
   AuthEntity? theUserInformation;
 

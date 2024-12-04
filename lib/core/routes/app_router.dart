@@ -1,8 +1,10 @@
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_commerce_app/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:e_commerce_app/features/auth/presentation/screens/login_screen.dart';
 import 'package:e_commerce_app/features/auth/presentation/screens/reset_password.dart';
 import 'package:e_commerce_app/features/auth/presentation/screens/signup_screen.dart';
+import 'package:e_commerce_app/features/chat/presentation/manager/chat_cubit.dart';
+import 'package:e_commerce_app/features/chat/presentation/pages/admin_chat_screen.dart';
 import 'package:e_commerce_app/features/home/domain/entities/home_entity.dart';
 import 'package:e_commerce_app/features/home/presentation/pages/home.dart';
 import 'package:e_commerce_app/features/home/presentation/pages/item_details_screen.dart';
@@ -17,10 +19,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/auth/presentation/cubit/auth_state.dart';
+import '../../features/chat/presentation/pages/chat_screen.dart';
 import '../../features/home/presentation/manager/home_cubit.dart';
 import '../../features/home/presentation/manager/home_state.dart';
-
-
+import '../services/service_locator_get_it.dart';
 
 
 // make string variables to carry name of paths like "/home" so when you change it change in one place
@@ -34,6 +36,8 @@ const String myAccountPath = "/myAccount";
 const String helpCenterPath = "/helpCenter";
 const String settingsPath = "/settings";
 const String notificationPath = "/notification";
+const String chatPath = "/chat";
+const String adminChatPath = "/adminChat";
 
 
 final GoRouter router = GoRouter(
@@ -42,30 +46,29 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: firstPage,
       builder: (context, state) {
+        return FirebaseAuth.instance.currentUser == null
+            ? OnBoardingScreen()
+            : BlocConsumer<HomeCubit, HomeStates>(
 
-
-       return FirebaseAuth.instance.currentUser ==null? OnBoardingScreen() : BlocConsumer<HomeCubit,HomeStates>(
-
-          listener: (context,state){},
-          builder: (context,state) => const Home(),
+          listener: (context, state) {},
+          builder: (context, state) => const Home(),
         );
-
       },
     ),
     GoRoute(
       path: loginPath,
       builder: (context, state) =>
-          BlocConsumer<AuthCubit,AuthState>(
-            listener: (context,state){},
-            builder: (context,state) => LoginScreen(),
+          BlocConsumer<AuthCubit, AuthState>(
+            listener: (context, state) {},
+            builder: (context, state) => LoginScreen(),
           ),
     ),
     GoRoute(
       path: signUpPath,
       builder: (context, state) =>
-          BlocConsumer<AuthCubit,AuthState>(
-            listener: (context,state){},
-            builder: (context,state) => const SignUpScreen(),
+          BlocConsumer<AuthCubit, AuthState>(
+            listener: (context, state) {},
+            builder: (context, state) => const SignUpScreen(),
           ),
     ),
     GoRoute(
@@ -76,20 +79,20 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: resetPasswordPath,
       builder: (context, state) =>
-          BlocConsumer<AuthCubit,AuthState>(
-            listener: (context,state){},
-            builder: (context,state) => ResetPassword(),
+          BlocConsumer<AuthCubit, AuthState>(
+            listener: (context, state) {},
+            builder: (context, state) => ResetPassword(),
           ),
     ),
     GoRoute(path: itemDetailsPath,
-        builder: (context,state) {
-          final product = state.extra as ProductEntity;
-              return     ItemDetailsScreen(product: product);
-        },
+      builder: (context, state) {
+        final product = state.extra as ProductEntity;
+        return ItemDetailsScreen(product: product);
+      },
     ),
     GoRoute(
-      path:myAccountPath,
-    builder:  (context,state)=>const MyAccountScreen(),
+      path: myAccountPath,
+      builder: (context, state) => const MyAccountScreen(),
     ),
     GoRoute(
       path: helpCenterPath,
@@ -103,7 +106,21 @@ final GoRouter router = GoRouter(
       path: notificationPath,
       builder: (context, state) => const NotificationScreen(),
     ),
-
+    GoRoute(
+      path: chatPath,
+      builder: (context, state) {
+        final params = state.extra as Map<String, dynamic>;
+        return ChatScreen(
+          messagesStream: params['messagesStream'] as Stream<
+              QuerySnapshot<Object?>>,
+          userIdToChatWith: params['userIdToChatWith'] as String,
+        );
+      },
+    ),
+    GoRoute(
+      path: adminChatPath,
+      builder: (context, state) => const AdminChatScreen(),
+    ),
 
 
   ],
