@@ -18,9 +18,11 @@ Real-time cart updates.
 Subtotal and total price calculation.
 ## 6. Wishlist
 Save favorite items for future purchases.
-## 7. Search
+## 7. Chat 
+Chat with the admin for any support.
+## 8. Search
 Advanced product search functionality 
-## 8. Profile
+## 9. Profile
 User profile management.
 Update account details, app settings, notifications, help center, and sign-out.
 # 🚀 Tech Stack
