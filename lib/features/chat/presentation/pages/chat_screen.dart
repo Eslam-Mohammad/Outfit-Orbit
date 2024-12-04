@@ -1,7 +1,9 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_commerce_app/core/constants/app_colors.dart';
 import 'package:e_commerce_app/features/chat/presentation/manager/chat_cubit.dart';
 import 'package:e_commerce_app/features/chat/presentation/manager/chat_state.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 
 import 'package:flutter/material.dart';
@@ -36,6 +38,36 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.delete),
+            onPressed: () {
+
+              AwesomeDialog(
+                dialogBackgroundColor: Color(0xff202c36),
+                titleTextStyle: const TextStyle(color: Colors.white),
+                context: context,
+                dialogType: DialogType.noHeader,
+                animType: AnimType.scale,
+                title: 'Delete All Chat',
+
+                btnCancelOnPress: () {},
+                btnOkOnPress: () {
+                  //delete chat logic
+                  getIt<ChatCubit>().deleteChatMethod(userId: getIt<AuthCubit>().isAdmin! ? widget.userIdToChatWith : FirebaseAuth.instance.currentUser!.uid);
+                  Navigator.of(context).pop();
+
+
+                },
+              ).show();
+
+
+
+
+
+            },
+          ),
+        ],
         backgroundColor: Color(0xff202c36),
         title: const Text("Customer Service Chat",
           style: TextStyle(color: Colors.grey),
@@ -86,7 +118,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       itemCount: messages.length,
                       itemBuilder: (context, index) {
 
-                        return CustomChatBubble(message: messages[index]);
+                        return CustomChatBubble(message: messages[index],uid:getIt<AuthCubit>().isAdmin! ? widget.userIdToChatWith : FirebaseAuth.instance.currentUser!.uid ,);
                       },
                     ),
                   ),
