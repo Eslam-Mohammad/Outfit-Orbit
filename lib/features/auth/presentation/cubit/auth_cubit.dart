@@ -2,11 +2,14 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:e_commerce_app/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:e_commerce_app/features/auth/domain/entities/auth_entitiy.dart';
 import 'package:e_commerce_app/features/auth/domain/usecases/get_admin_status.dart';
 import 'package:e_commerce_app/features/cart/presentation/manager/cart_cubit.dart';
 import 'package:e_commerce_app/features/wishlist/presentation/manager/wishlist_cubit.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import '../../../../core/services/service_locator_get_it.dart';
+import '../../data/models/auth_model.dart';
 import '../../domain/usecases/reset_password.dart';
 import '../../domain/usecases/signin_google.dart';
 import '../../domain/usecases/signin_with_email_password.dart';
@@ -37,9 +40,15 @@ class AuthCubit extends Cubit<AuthState> {
       required this.resetPassword,
       required this.signUpWithEmailAndPassword,
       required this.getAdminStatus,
-      }) : super(AuthInitial());
+      }) : super(AuthInitial()){
 
+    theUserInformation= AuthModel.fromFirebaseUser(FirebaseAuth.instance.currentUser);
+     getDocumentId();
+  }
 
+Future<void>getDocumentId ()async{
+  theUserInformation!.documentId=await AuthRemoteDataSource().bringUserDocumentId();
+}
 
   bool? isAgreed ;
   void agreeToTerms(bool value) {
@@ -152,11 +161,8 @@ Future<void> addUserInfo(Map<String, dynamic> userInfo) async {
   QuerySnapshot querySnapshot = await users.where('uid', isEqualTo: userInfo['uid']).get();
 
   if (querySnapshot.docs.isEmpty) {
-    await users.add(userInfo)
-        .then((value) => print("User Added"))
-        .catchError((error) => print("Failed to add user: $error"));
-  } else {
-    print("User already exists");
+    await users.add(userInfo);
+
   }
 }
 

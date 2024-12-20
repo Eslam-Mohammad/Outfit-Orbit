@@ -60,12 +60,8 @@ List<dynamic> appScreens=[
     emit(HomeProductsLoading());
     final result = await getHomeProducts();
     result.fold((l){
-      print("*****************************************************");
-      print(l.errMessage);
-      print(l.toString()) ;
       emit(HomeProductsFailure(l.errMessage));
     }, (r){
-      print("*******************************************products filles**********");
          products.addAll(r) ;
       emit(HomeProductsSuccess());
     });

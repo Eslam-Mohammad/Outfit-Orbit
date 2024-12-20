@@ -44,7 +44,7 @@ class _ChatScreenState extends State<ChatScreen> {
             onPressed: () {
 
               AwesomeDialog(
-                dialogBackgroundColor: Color(0xff202c36),
+                dialogBackgroundColor: const Color(0xff202c36),
                 titleTextStyle: const TextStyle(color: Colors.white),
                 context: context,
                 dialogType: DialogType.noHeader,
@@ -68,14 +68,14 @@ class _ChatScreenState extends State<ChatScreen> {
             },
           ),
         ],
-        backgroundColor: Color(0xff202c36),
+        backgroundColor: const Color(0xff202c36),
         title: const Text("Customer Service Chat",
           style: TextStyle(color: Colors.grey),
         ),
         centerTitle: true,
       ),
       body: Container(
-        color: Color(0xff111d26),
+        color: const Color(0xff111d26),
         child: StreamBuilder<QuerySnapshot>(
           stream: widget.messagesStream,
           builder: (context, snapshot) {
@@ -148,7 +148,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                 borderSide: BorderSide.none,
                               ),
                               filled: true,
-                              fillColor: Color(0xff2a373d),
+                              fillColor: const Color(0xff2a373d),
                               contentPadding: const EdgeInsets.symmetric(
                                   vertical: 10.0, horizontal: 20.0),
                             ),

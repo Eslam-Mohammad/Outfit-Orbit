@@ -1,10 +1,10 @@
 
 import 'package:e_commerce_app/features/home/presentation/manager/home_cubit.dart';
 import 'package:e_commerce_app/features/home/presentation/manager/home_state.dart';
-import 'package:e_commerce_app/features/home/presentation/widgets/category_bar_builder.dart';
+
 
 import 'package:e_commerce_app/features/home/presentation/widgets/products_grid.dart';
-import 'package:e_commerce_app/features/home/presentation/widgets/search_bar_builder.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
@@ -43,7 +43,7 @@ class HomeScreen extends StatelessWidget {
             SizedBox(
               height: size.height * 0.03,
             ),
-            SearchBarBuilder(searchController: searchController),
+            
 
             // categories
             SizedBox(

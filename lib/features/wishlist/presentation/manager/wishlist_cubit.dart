@@ -32,13 +32,9 @@ class WishlistCubit extends Cubit<WishlistState>{
     emit(WishlistLoading());
     final result = await getWhishlist();
     result.fold((l) {
-      print("###################################################");
-      print(l.errMessage);
       emit(WishlistFailure(message: l.errMessage));
     }, (r) {
-      print("**********************************wish list filled");
       wishlist.addAll(r);
-      print(wishlist.length);
       getIt<HomeCubit>().emit(HomeInitial());
       emit(WishlistSuccess());
 
@@ -51,8 +47,6 @@ class WishlistCubit extends Cubit<WishlistState>{
     final result = await addProductIdToWishlist(product.id.toInt());
     result.fold((l) {
       wishlist.remove(product);
-      print("###################################################");
-      print(l.errMessage);
       emit(WishlistFailure(message: l.errMessage));
     }, (r) {
       emit(WishlistSuccess());

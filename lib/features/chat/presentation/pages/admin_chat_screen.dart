@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -24,14 +23,14 @@ class _AdminChatScreenState extends State<AdminChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xff202c36),
+        backgroundColor: const Color(0xff202c36),
         title: const Text("Admin Chat",
           style: TextStyle(color: Colors.grey),
         ),
 
       ),
       body: Container(
-        color: Color(0xff111d26),
+        color: const Color(0xff111d26),
         child: StreamBuilder<QuerySnapshot>(
           stream:chatStream,
           builder: (context,snapshot) {
@@ -63,41 +62,37 @@ class _AdminChatScreenState extends State<AdminChatScreen> {
                       return const Center(child: Text('Error loading data'));
                     }
                     final customerInfo = snapshot.data;
-                    return Container(
-
-
-                      child: ListTile(
-                        leading: CircleAvatar(
-                          child: Text(customerInfo?.displayName?[0] ?? "N"),
-                        ),
-                        title: Text(customerInfo?.displayName ?? "no name" ,
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        subtitle: Text(chats[index].lastMessage,
-                          style: TextStyle(color: Colors.grey),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        trailing: Text(
-                          '${DateTime.parse(chats[index].lastUpdated).hour > 12 ? DateTime.parse(chats[index].lastUpdated).hour - 12 : DateTime.parse(chats[index].lastUpdated).hour ==0? '12':DateTime.parse(chats[index].lastUpdated).hour }:${DateTime.parse(chats[index].lastUpdated).minute > 9?DateTime.parse(chats[index].lastUpdated).minute: "0${DateTime.parse(chats[index].lastUpdated).minute}" } ${DateTime.parse(chats[index].lastUpdated).hour >= 12 ? 'PM' : 'AM'}',
-                          style: TextStyle(color: Color(0xff02b09c)),
-                        ),
-                        onTap: () async {
-                          Stream<QuerySnapshot> messagesStream = FirebaseFirestore
-                              .instance
-                              .collection('chats')
-                              .doc(
-                              await ChatRemoteDataSource().getDocumentIdOfChat(
-                                  chats[index].uid))
-                              .collection("messages")
-                              .orderBy("time", descending: true)
-                              .snapshots();
-                          GoRouter.of(context).push(chatPath, extra: {
-                            'messagesStream': messagesStream,
-                            'userIdToChatWith': chats[index].uid,
-                          });
-                        },
+                    return ListTile(
+                      leading: CircleAvatar(
+                        child: Text(customerInfo?.displayName?[0] ?? "N"),
                       ),
+                      title: Text(customerInfo?.displayName ?? "no name" ,
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                      subtitle: Text(chats[index].lastMessage,
+                        style: const TextStyle(color: Colors.grey),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      trailing: Text(
+                        '${DateTime.parse(chats[index].lastUpdated).hour > 12 ? DateTime.parse(chats[index].lastUpdated).hour - 12 : DateTime.parse(chats[index].lastUpdated).hour ==0? '12':DateTime.parse(chats[index].lastUpdated).hour }:${DateTime.parse(chats[index].lastUpdated).minute > 9?DateTime.parse(chats[index].lastUpdated).minute: "0${DateTime.parse(chats[index].lastUpdated).minute}" } ${DateTime.parse(chats[index].lastUpdated).hour >= 12 ? 'PM' : 'AM'}',
+                        style: const TextStyle(color: Color(0xff02b09c)),
+                      ),
+                      onTap: () async {
+                        Stream<QuerySnapshot> messagesStream = FirebaseFirestore
+                            .instance
+                            .collection('chats')
+                            .doc(
+                            await ChatRemoteDataSource().getDocumentIdOfChat(
+                                chats[index].uid))
+                            .collection("messages")
+                            .orderBy("time", descending: true)
+                            .snapshots();
+                        GoRouter.of(context).push(chatPath, extra: {
+                          'messagesStream': messagesStream,
+                          'userIdToChatWith': chats[index].uid,
+                        });
+                      },
                     );
                   },
                 );

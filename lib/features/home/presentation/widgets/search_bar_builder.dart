@@ -11,7 +11,6 @@ class SearchBarBuilder extends StatelessWidget {
 
 
       onSubmitted: (value){
-        print("******************** $value");
 
 
       },

@@ -21,7 +21,7 @@ class CustomChatBubble extends StatelessWidget {
       child: InkWell(
         onLongPress: () {
           AwesomeDialog(
-            dialogBackgroundColor: Color(0xff202c36),
+            dialogBackgroundColor: const Color(0xff202c36),
               titleTextStyle: const TextStyle(color: Colors.white),
               context: context,
               dialogType: DialogType.noHeader,
@@ -40,15 +40,15 @@ class CustomChatBubble extends StatelessWidget {
           ).show();
         },
         child: Container(
-          padding: EdgeInsets.all(10),
-          margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+          padding: const EdgeInsets.all(10),
+          margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
           decoration: BoxDecoration(
-            color: message.isMe ? Color(0xff084542) : Color(0xff202c36),
+            color: message.isMe ? const Color(0xff084542) : const Color(0xff202c36),
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(15),
-              topRight: Radius.circular(15),
-              bottomLeft: message.isMe ? Radius.circular(15) : Radius.zero,
-              bottomRight: message.isMe ? Radius.zero : Radius.circular(15),
+              topLeft: const Radius.circular(15),
+              topRight: const Radius.circular(15),
+              bottomLeft: message.isMe ? const Radius.circular(15) : Radius.zero,
+              bottomRight: message.isMe ? Radius.zero : const Radius.circular(15),
             ),
           ),
           child: Column(

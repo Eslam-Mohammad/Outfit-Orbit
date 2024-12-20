@@ -1,8 +1,14 @@
+import 'dart:developer';
+
+import 'package:e_commerce_app/core/services/local_notifications_service.dart';
+
+import 'package:e_commerce_app/core/services/send_notification.dart';
 import 'package:e_commerce_app/core/services/service_locator_get_it.dart';
 import 'package:e_commerce_app/features/home/presentation/manager/home_cubit.dart';
 import 'package:e_commerce_app/features/home/presentation/manager/home_state.dart';
 
 import 'package:e_commerce_app/generated/assets.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -10,10 +16,25 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:go_router/go_router.dart';
 
+
 import '../../../../core/routes/app_router.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({super.key});
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  @override
+  void initState() {
+    super.initState();
+    LocalNotificationService.streamController.stream.listen((event) {
+      print('notification tapped in foreground ');
+
+    });
+  }
 
 
   @override
@@ -40,7 +61,8 @@ class Home extends StatelessWidget {
               IconButton(
                 iconSize: 28,
                 icon: const Icon(Icons.search),
-                onPressed: () {
+                onPressed: () async {
+
                   getIt<HomeCubit>().changeIndex(3);
                 },
               ),

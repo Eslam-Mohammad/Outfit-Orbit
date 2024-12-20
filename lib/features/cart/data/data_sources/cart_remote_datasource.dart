@@ -24,15 +24,15 @@ class CartRemoteDataSource{
         await FirebaseFirestore.instance.collection('users').doc(getIt<AuthCubit>().theUserInformation!.documentId).update(
           {'cart': FieldValue.arrayUnion([productId])},
         );
-        print('Field added/updated successfully');
+
         return unit;
       } else {
-        print('Document not found');
+
         throw ServerException(ErrorModel(errorMessage: "user not found",status: 500));
       }
 
     } catch (e) {
-      print("***************************  remote method will throw");
+
       throw ServerException(ErrorModel(errorMessage: e.toString(),status: 500));
     }
   }
@@ -51,10 +51,10 @@ class CartRemoteDataSource{
         await FirebaseFirestore.instance.collection('users').doc(getIt<AuthCubit>().theUserInformation!.documentId).update(
           {'cart': FieldValue.arrayRemove([productId])},
         );
-        print('Field added/updated successfully');
+
         return unit;
       } else {
-        print('Document not found');
+
         return unit;
       }
 
@@ -99,7 +99,7 @@ class CartRemoteDataSource{
         return products;
 
       } else {
-        print('Document not found');
+
         throw ServerException(ErrorModel(errorMessage: 'Document not found',status: 404));
       }
 

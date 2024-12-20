@@ -148,7 +148,7 @@ class ItemDetailsScreen extends StatelessWidget {
               Row(
                children: [
                  Text(
-                   '\$${product.price.toStringAsFixed(2)}',
+                   '\$${product.price.toStringAsFixed(1)}',
                    style: const TextStyle(
                      color: Colors.black,
                      fontSize: 20,
@@ -158,7 +158,7 @@ class ItemDetailsScreen extends StatelessWidget {
                  const SizedBox(width: 15,),
                  if(product.discount>0)
                  Text(
-                   '\$${product.oldPrice.toStringAsFixed(2)}',
+                   '\$${product.oldPrice.toStringAsFixed(1)}',
                    style: const TextStyle(
                      color: Colors.grey,
                      fontSize: 20,
@@ -172,7 +172,7 @@ class ItemDetailsScreen extends StatelessWidget {
                       '-${product.discount.toStringAsFixed(0)}%OFF',
                       style: const TextStyle(
                         color: Colors.red,
-                        fontSize: 25,
+                        fontSize: 22,
                         fontWeight: FontWeight.bold,
                       ),
                     ),

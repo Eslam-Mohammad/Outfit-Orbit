@@ -111,7 +111,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         CustomElevatedbtn(text: "Sign Up", onPressed: (){
                           if(formKey.currentState!.validate()&&getIt<AuthCubit>().isAgreed!) {
 
-                            getIt<AuthCubit>().signUpWithEmail(emailController.text, passwordController.text,firstNameController.text+" "+lastNameController.text);
+                            getIt<AuthCubit>().signUpWithEmail(emailController.text.trim(), passwordController.text.trim(),'${firstNameController.text} ${lastNameController.text}');
 
 
                           }

@@ -3,7 +3,7 @@ import 'package:e_commerce_app/features/auth/presentation/cubit/auth_cubit.dart'
 import 'package:e_commerce_app/features/auth/presentation/screens/login_screen.dart';
 import 'package:e_commerce_app/features/auth/presentation/screens/reset_password.dart';
 import 'package:e_commerce_app/features/auth/presentation/screens/signup_screen.dart';
-import 'package:e_commerce_app/features/chat/presentation/manager/chat_cubit.dart';
+
 import 'package:e_commerce_app/features/chat/presentation/pages/admin_chat_screen.dart';
 import 'package:e_commerce_app/features/home/domain/entities/home_entity.dart';
 import 'package:e_commerce_app/features/home/presentation/pages/home.dart';
@@ -22,7 +22,7 @@ import '../../features/auth/presentation/cubit/auth_state.dart';
 import '../../features/chat/presentation/pages/chat_screen.dart';
 import '../../features/home/presentation/manager/home_cubit.dart';
 import '../../features/home/presentation/manager/home_state.dart';
-import '../services/service_locator_get_it.dart';
+
 
 
 // make string variables to carry name of paths like "/home" so when you change it change in one place
@@ -41,6 +41,7 @@ const String adminChatPath = "/adminChat";
 
 
 final GoRouter router = GoRouter(
+ 
   routes: [
 
     GoRoute(

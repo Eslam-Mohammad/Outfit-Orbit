@@ -31,7 +31,6 @@ final size = MediaQuery.of(context).size;
             SearchBar(
 
               onSubmitted: (value){
-                print("******************** $value");
                 getIt<SearchCubit>().searchMethod(value);
 
               },

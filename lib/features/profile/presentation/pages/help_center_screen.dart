@@ -56,7 +56,7 @@ class HelpCenterScreen extends StatelessWidget {
             title: Text('What payment methods do you accept?',style: TextStyle(fontSize: 18),),
             children: <Widget>[
               ListTile(
-                title: const Text(style: TextStyle(fontSize: 18),'We accept various payment methods, including major credit cards (Visa, MasterCard, American Express), PayPal, Apple Pay, and Google Pay. All payments are securely processed, and your details are protected with advanced encryption.'),
+                title:  Text(style: TextStyle(fontSize: 18),'We accept various payment methods, including major credit cards (Visa, MasterCard, American Express), PayPal, Apple Pay, and Google Pay. All payments are securely processed, and your details are protected with advanced encryption.'),
               ),
             ],
           ),

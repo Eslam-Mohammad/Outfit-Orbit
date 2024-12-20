@@ -2,7 +2,7 @@ import 'package:e_commerce_app/core/constants/app_colors.dart';
 import 'package:e_commerce_app/core/constants/app_text_styles.dart';
 import 'package:e_commerce_app/generated/assets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
+
 import 'package:flutter_svg/flutter_svg.dart';
 
 class OnBoardingBody extends StatelessWidget {

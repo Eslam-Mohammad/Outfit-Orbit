@@ -18,6 +18,7 @@ class WishlistRemoteDataSource{
     try {
 
 
+
       if (getIt<AuthCubit>().theUserInformation!.documentId != null) {
 
         await FirebaseFirestore.instance.collection('users').doc(getIt<AuthCubit>().theUserInformation!.documentId).update(
@@ -50,10 +51,8 @@ class WishlistRemoteDataSource{
         await FirebaseFirestore.instance.collection('users').doc(getIt<AuthCubit>().theUserInformation!.documentId).update(
           {'wishlist': FieldValue.arrayRemove([productId])},
         );
-        print('Field added/updated successfully');
         return unit;
       } else {
-        print('Document not found');
         return unit;
       }
 
@@ -98,7 +97,6 @@ List<ProductModel> products = [];
         return products;
 
       } else {
-        print('Document not found');
         throw ServerException(ErrorModel(errorMessage: 'Document not found',status: 404));
       }
 

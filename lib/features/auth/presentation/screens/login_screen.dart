@@ -112,7 +112,7 @@ class LoginScreen extends StatelessWidget {
                           CustomElevatedbtn(text: "Sign In", onPressed: ()async{
                             if(formKey.currentState!.validate()){
 
-                              getIt<AuthCubit>().signInWithEmail(emailController.text, passwordController.text);
+                              getIt<AuthCubit>().signInWithEmail(emailController.text.trim(), passwordController.text.trim());
 
             
                             }
